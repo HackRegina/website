@@ -30,7 +30,7 @@ const Benefit = ({ title, text, icon }: FeatureProps) => {
 
 export const Benefits = () => {
   return (
-    <Box px={4} py={60}>
+    <Box px={4} py={60} id="benefits">
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
         <Benefit
           icon={

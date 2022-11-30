@@ -19,9 +19,8 @@ import { NextPage } from 'next'
 interface IProps {}
 
 export const CallToAction: NextPage = ({}: IProps) => {
-  const { colorMode } = useColorMode()
   return (
-    <Container maxW={'7xl'} pt={{ md: 40 }}>
+    <Container maxW={'7xl'} pt={{ md: 40 }} id="call-to-action">
       <Stack
         align={'center'}
         spacing={{ base: 8, md: 10 }}

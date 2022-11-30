@@ -8,8 +8,7 @@ export const Logo = (props: ImageProps) => {
       {...props}
       src={colorMode === 'light' ? '/images/hackregina-logo.png' : '/images/hackregina-white.png'}
       alt="HackRegina"
-      height={50}
-      width={243}
+      style={{...props.style, maxHeight: 50}}
     />
   )
 }

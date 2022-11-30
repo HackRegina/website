@@ -61,7 +61,7 @@ export const Navbar = () => {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <Logo height={50} width={243} />
+            <Logo />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -187,11 +187,25 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 }
 
 const MobileNav = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      <Stack flex={{ base: 1, md: 0 }} direction={'row'} spacing={6}>
+        <Button onClick={toggleColorMode}>
+          {colorMode === 'light' ? (
+            <>
+              <MoonIcon mr="0.5rem" /> Dark mode
+            </>
+          ) : (
+            <>
+              <SunIcon  mr="0.5rem" /> Light mode
+            </>
+          )}
+        </Button>
+      </Stack>
     </Stack>
   )
 }
