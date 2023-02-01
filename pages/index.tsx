@@ -1,4 +1,5 @@
 import { Text } from '@chakra-ui/react'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
 import type { NextPage } from 'next'
 import { Benefits } from '../components/Benefits/Benefits'
 import { CallToAction } from '../components/CallToAction/CallToAction'
@@ -6,12 +7,21 @@ import { Footer } from '../components/Footer/Footer'
 import { Members } from '../components/Members/Members'
 import { Navbar } from '../components/Navbar/Navbar'
 import { Organizations } from '../components/Organizations/Organizations'
-import { CommunityMembers } from '../constants/members'
 import { HackReginaPartners } from '../constants/partners'
 import { HackReginaSponsors } from '../constants/sponsors'
+import { fetchMembers } from '../fetch/members'
+import { useMembers } from '../hooks/useMembers'
+import { ICommunityMember } from '../interfaces/community-member'
 import styles from '../styles/Home.module.css'
+import { generateQueryKey } from '../utils/generateQueryKey'
 
-const Home: NextPage = () => {
+interface IProps {
+  members: ICommunityMember[]
+  cursor: string
+}
+
+const Home: NextPage<IProps> = ({}: IProps) => {
+  const { members } = useMembers()
   return (
     <div className={styles.container}>
       <Navbar />
@@ -30,10 +40,23 @@ const Home: NextPage = () => {
           to continue to provide services to our community.‰
         </Text>
       </Organizations>
-      <Members members={CommunityMembers} />
+      <Members members={members} />
       <Footer />
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: generateQueryKey({ key: 'members', query: { cursor: null } }),
+    queryFn: () => fetchMembers(),
+  })
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
 }
 
 export default Home
