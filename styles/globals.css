@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -23,4 +23,30 @@ a {
     color: white;
     background: black;
   }
+}
+
+.map-container {
+  height: 100vh;
+}
+
+.tech-stack-collection {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 10px;
+  padding: 0;
+  gap: 5px;
+  /* list-style: none; */
+}
+
+.tech-stack-item {
+  padding: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #eee;
+}
+
+.tech-stack-item:hover {
+  background: #ddd;
 }
