@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,6 +14,9 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@types/mapbox-gl": "^2.7.10",
+    "@slack/web-api": "^6.8.0",
+    "@tanstack/react-query": "^4.24.4",
+    "@tanstack/react-query-devtools": "^4.24.4",
     "@visx/hierarchy": "^2.10.0",
     "@visx/responsive": "^2.10.0",
     "framer-motion": "^7.6.1",

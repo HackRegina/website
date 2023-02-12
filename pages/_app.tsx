@@ -1,6 +1,9 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { QueryClientProvider, Hydrate, QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import React, { useState } from 'react'
 import '../styles/globals.css'
 
 const colors = {
@@ -35,20 +38,26 @@ const config = {
 
 const theme = extendTheme({ colors, config })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient())
   return (
-    <ChakraProvider theme={theme}>
-      <Head>
-        <title>HackRegina</title>
-        <meta
-          name="description"
-          content="HackRegina is the beginning of a strong and well-known tech community for Regina, SK. The non-profit organization started as a small Slack channel but has begun to grow into a community for software developers to share knowledge and get to know one another."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ChakraProvider theme={theme}>
+          <Head>
+            <title>HackRegina</title>
+            <meta
+              name="description"
+              content="HackRegina is the beginning of a strong and well-known tech community for Regina, SK. The non-profit organization started as a small Slack channel but has begun to grow into a community for software developers to share knowledge and get to know one another."
+            />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </Hydrate>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   )
 }
 
-export default MyApp
+export default App

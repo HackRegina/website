@@ -8,10 +8,9 @@ const hackerScore = (d: ICommunityMember): number => {
   let multiplier = 1
   if (!d) return 0
   if (d.is_primary_owner) multiplier += 8
-  if (d.is_owner) multiplier += 2
-  if (d.is_admin) multiplier += 0.5
-  if (d.days_active) multiplier *= d.days_active / 20
-  return multiplier * (d.messages_posted + d.reactions_added)
+  if (d.is_owner) multiplier += 4
+  if (d.is_admin) multiplier += 2
+  return multiplier * 5
 }
 
 interface IProps {
@@ -29,7 +28,6 @@ export const Members = ({ members }: IProps) => {
     }),
     [members],
   )
-
   const root = React.useMemo(
     () =>
       hierarchy<ICommunityMember>(pack)
@@ -37,7 +35,6 @@ export const Members = ({ members }: IProps) => {
         .sort((a, b) => hackerScore(b.data) - hackerScore(a.data)),
     [pack],
   )
-  console.log(background)
   return (
     <Container maxW={'7xl'} id="partners" mb={60}>
       <Stack
@@ -90,7 +87,7 @@ export const Members = ({ members }: IProps) => {
               }
 
               .member-link:hover {
-                z-index: 10;
+                z-index: 10 !important;
                 transform: translate(-50%, -50%) scale(1.1);
               }
 
@@ -127,23 +124,32 @@ export const Members = ({ members }: IProps) => {
                                 '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                             }}
                           >
+                            <picture >
+                              <source media="(max-width: 24px)" srcSet={circle.data?.image_24} />
+                              <source media="(min-width: 25px) and (max-width: 32px)" srcSet={circle.data?.image_32} />
+                              <source media="(min-width: 33px) and (max-width: 48px)" srcSet={circle.data?.image_48} />
+                              <source media="(min-width: 49px) and (max-width: 72px)" srcSet={circle.data?.image_72} />
+                              <source media="(min-width: 73px) and (max-width: 192px)" srcSet={circle.data?.image_192} />
+                              <source media="(min-width: 193px) and (max-width: 512px)" srcSet={circle.data?.image_512} />
+                              <source media="(min-width: 513px) and (max-width: 1024px)" srcSet={circle.data?.image_1024} />
+                              <img
+                                src={circle.data?.image_original || circle.data?.image_1024 || circle.data?.image_512 || circle.data?.image_192 || circle.data?.image_72 || circle.data?.image_48 || circle.data?.image_32 || circle.data?.image_24}
+                                alt={circle.data?.display_name || 'Member'}
+                                style={{
+                                  position: 'absolute',
+                                  left: '50%',
+                                  backgroundPosition: 'center',
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundSize: 'contain',
+                                  transform: 'translate(-50%)',
+                                  borderRadius: '9999px',
+                                  width: '95%',
+                                  height: '95%',
+                                }}
+                              />
+                            </picture>
                             <div
-                              key={`circle-${circle.data.user_id}`}
-                              style={{
-                                backgroundImage:
-                                  circle.data.image_original &&
-                                  `url(${circle.data.image_original})`,
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundSize: 'contain',
-                                transform: 'translate(-50%)',
-                                borderRadius: '9999px',
-                                width: '95%',
-                                height: '95%',
-                              }}
+                              
                             />
                             <Flex
                               align="center"
