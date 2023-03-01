@@ -36,7 +36,7 @@ export const Members = ({ members }: IProps) => {
     [pack],
   )
   return (
-    <Container maxW={'7xl'} id="partners" mb={60}>
+    <Container id="community" mb={60}>
       <Stack
         flex={1}
         spacing={{ base: 5, md: 10 }}
@@ -67,7 +67,7 @@ export const Members = ({ members }: IProps) => {
           </Text>
         </Heading>
       </Stack>
-      <ParentSize>
+      <ParentSize style={{ width: '100%', height: '100%', position: 'relative' }}>
         {({ width = 800 }) => {
           return width < 10 ? null : (
             <div
@@ -124,16 +124,43 @@ export const Members = ({ members }: IProps) => {
                                 '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                             }}
                           >
-                            <picture >
+                            <picture>
                               <source media="(max-width: 24px)" srcSet={circle.data?.image_24} />
-                              <source media="(min-width: 25px) and (max-width: 32px)" srcSet={circle.data?.image_32} />
-                              <source media="(min-width: 33px) and (max-width: 48px)" srcSet={circle.data?.image_48} />
-                              <source media="(min-width: 49px) and (max-width: 72px)" srcSet={circle.data?.image_72} />
-                              <source media="(min-width: 73px) and (max-width: 192px)" srcSet={circle.data?.image_192} />
-                              <source media="(min-width: 193px) and (max-width: 512px)" srcSet={circle.data?.image_512} />
-                              <source media="(min-width: 513px) and (max-width: 1024px)" srcSet={circle.data?.image_1024} />
+                              <source
+                                media="(min-width: 25px) and (max-width: 32px)"
+                                srcSet={circle.data?.image_32}
+                              />
+                              <source
+                                media="(min-width: 33px) and (max-width: 48px)"
+                                srcSet={circle.data?.image_48}
+                              />
+                              <source
+                                media="(min-width: 49px) and (max-width: 72px)"
+                                srcSet={circle.data?.image_72}
+                              />
+                              <source
+                                media="(min-width: 73px) and (max-width: 192px)"
+                                srcSet={circle.data?.image_192}
+                              />
+                              <source
+                                media="(min-width: 193px) and (max-width: 512px)"
+                                srcSet={circle.data?.image_512}
+                              />
+                              <source
+                                media="(min-width: 513px) and (max-width: 1024px)"
+                                srcSet={circle.data?.image_1024}
+                              />
                               <img
-                                src={circle.data?.image_original || circle.data?.image_1024 || circle.data?.image_512 || circle.data?.image_192 || circle.data?.image_72 || circle.data?.image_48 || circle.data?.image_32 || circle.data?.image_24}
+                                src={
+                                  circle.data?.image_original ||
+                                  circle.data?.image_1024 ||
+                                  circle.data?.image_512 ||
+                                  circle.data?.image_192 ||
+                                  circle.data?.image_72 ||
+                                  circle.data?.image_48 ||
+                                  circle.data?.image_32 ||
+                                  circle.data?.image_24
+                                }
                                 alt={circle.data?.display_name || 'Member'}
                                 style={{
                                   position: 'absolute',
@@ -148,9 +175,7 @@ export const Members = ({ members }: IProps) => {
                                 }}
                               />
                             </picture>
-                            <div
-                              
-                            />
+                            <div />
                             <Flex
                               align="center"
                               justify="center"
