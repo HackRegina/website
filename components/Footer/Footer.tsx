@@ -64,6 +64,9 @@ export const Footer = () => {
             <Box>
               <Logo height={50} width={243} />
             </Box>
+          </Stack>
+          <Stack align={'flex-start'}>
+            <ListHeader>Stay up to date</ListHeader>
             <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Facebook'} href="https://www.facebook.com/HackRegina">
                 <Icon viewBox="0 0 320 512" h={4}>
@@ -97,42 +100,6 @@ export const Footer = () => {
                   />
                 </Icon>
               </SocialButton>
-            </Stack>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Stay up to date</ListHeader>
-            <Stack direction={'row'}>
-              <Input
-                placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                border={0}
-                _focus={{
-                  bg: 'whiteAlpha.300',
-                }}
-              />
-              <IconButton
-                colorScheme={'brand_red'}
-                bg={useColorModeValue('brand_red.700', 'brand_red.300')}
-                _hover={{ bg: 'brand_red.500' }}
-                aria-label="Subscribe"
-                icon={
-                  <Icon viewBox="0 0 512 512">
-                    <defs>
-                      <style>{`.fa-secondary{opacity:.4}`}</style>
-                    </defs>
-                    <path
-                      className="fa-primary"
-                      fill="currentColor"
-                      d="M416 96l-217.3 279.3C194.4 380.1 192 387.9 192 394.1L191.1 512L122.3 360.3L416 96z"
-                    />
-                    <path
-                      className="fa-secondary"
-                      fill="currentColor"
-                      d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1L191.1 512L192 394.1c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"
-                    />
-                  </Icon>
-                }
-              />
             </Stack>
           </Stack>
         </SimpleGrid>
