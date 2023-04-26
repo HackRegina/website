@@ -15,10 +15,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
+import { useRef, useState } from 'react'
 
 interface IProps {}
 
 export const CallToAction: NextPage = ({}: IProps) => {
+  const [videoStatus, setVideoStatus] = useState<'idle' | 'playing' | 'paused'>('idle')
   return (
     <Container maxW={'7xl'} pt={{ md: 40 }} id="call-to-action">
       <Stack
@@ -93,28 +95,50 @@ export const CallToAction: NextPage = ({}: IProps) => {
             width={'full'}
             overflow={'hidden'}
           >
-            <IconButton
-              aria-label={'Play Button'}
-              variant={'ghost'}
-              _hover={{ bg: 'transparent' }}
-              icon={<PlayIcon w={12} h={12} />}
-              size={'lg'}
-              color={'white'}
-              position={'absolute'}
-              left={'50%'}
-              top={'50%'}
-              transform={'translateX(-50%) translateY(-50%)'}
-            />
-            <Image
-              alt={'Hero Image'}
-              fit={'cover'}
-              align={'center'}
-              w={'100%'}
-              h={'100%'}
-              src={
-                'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80'
-              }
-            />
+            {videoStatus === 'idle' && (
+              <>
+                <IconButton
+                  aria-label={'Play Button'}
+                  variant={'ghost'}
+                  _hover={{ bg: 'transparent' }}
+                  icon={<PlayIcon w={12} h={12} />}
+                  size={'lg'}
+                  color={'white'}
+                  position={'absolute'}
+                  left={'50%'}
+                  top={'50%'}
+                  transform={'translateX(-50%) translateY(-50%)'}
+                  onClick={() => setVideoStatus('playing')}
+                />
+                <Image
+                  alt={'Hackathon 2023'}
+                  fit={'cover'}
+                  align={'center'}
+                  w={'100%'}
+                  h={'100%'}
+                  src={'/images/hackathon_2023.png'}
+                />
+              </>
+            )}
+            {(videoStatus === 'paused' || videoStatus === 'playing') && (
+              <Box
+                as="video"
+                src={'/videos/hackathon_2023.mp4'}
+                poster={'/images/hackathon_2023.png'}
+                objectFit="cover"
+                autoPlay={true}
+                minHeight={'100%'}
+                onClick={(e: any) => {
+                  if (videoStatus === 'playing') {
+                    e.currentTarget.pause()
+                    setVideoStatus('paused')
+                  } else {
+                    e.currentTarget.play()
+                    setVideoStatus('playing')
+                  }
+                }}
+              />
+            )}
           </Box>
         </Flex>
       </Stack>

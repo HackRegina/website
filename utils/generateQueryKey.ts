@@ -1,4 +1,5 @@
-type KeyType = 'members'
+type KeyType = 'members' | 'organizations'
+
 export const generateQueryKey = ({
   key,
   id = null,
