@@ -1,35 +1,755 @@
-[
-  {
-    "name": "Cultivator",
-    "url": "https://www.cultivator.ca",
-    "image": {
-      "light": "/images/cultivator-light.png",
-      "dark": "/images/cultivator-dark.png"
+{
+  "$schema": "https://raw.githubusercontent.com/HackRegina/website/main/schema/organizations.schema.json",
+  "items": [
+    {
+      "name": "Cultivator",
+      "url": "https://www.cultivator.ca",
+      "image": {
+        "light": "/images/cultivator-light.png",
+        "dark": "/images/cultivator-dark.png"
+      },
+      "is_partner": true,
+      "is_sponsor": false,
+      "sponsor_tier": null
     },
-    "is_partner": true,
-    "is_sponsor": false,
-    "sponsor_tier": null
-  },
-  {
-    "name": "Tandem X Visuals",
-    "url": "https://www.cultivator.ca",
-    "image": {
-      "light": "/images/tandem-x-visuals-light.png",
-      "dark": "/images/tandem-x-visuals-dark.png"
+    {
+      "name": "Tandem X Visuals",
+      "url": "https://www.cultivator.ca",
+      "image": {
+        "light": "/images/tandem-x-visuals-light.png",
+        "dark": "/images/tandem-x-visuals-dark.png"
+      },
+      "is_partner": true,
+      "is_sponsor": false,
+      "sponsor_tier": null
     },
-    "is_partner": true,
-    "is_sponsor": false,
-    "sponsor_tier": null
-  },
-  {
-    "name": "Innovation Saskatchewan",
-    "url": "https://innovationsask.ca",
-    "image": {
-      "light": "/images/innovation-sk-light.png",
-      "dark": "/images/innovation-sk-dark.png"
+    {
+      "name": "Innovation Saskatchewan",
+      "url": "https://innovationsask.ca",
+      "image": {
+        "light": "/images/innovation-sk-light.png",
+        "dark": "/images/innovation-sk-dark.png"
+      },
+      "is_partner": true,
+      "is_sponsor": false,
+      "sponsor_tier": null
     },
-    "is_partner": true,
-    "is_sponsor": false,
-    "sponsor_tier": null
-  }
-]
+    {
+      "name": "Vivvo Application Studios",
+      "url": "http://www.vivvo.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Government or public administration",
+      "address": "300A - 2221 Cornwall St.\nRegina, SK\nS4P 2L1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.443612,
+          -104.611938
+        ]
+      },
+      "sponsorship": "platinum",
+      "technologies": [
+        "Angular",
+        "Angular.js",
+        "Consul",
+        "Docker",
+        "Go",
+        "Java",
+        "Node.js",
+        "Nomad",
+        "Terraform"
+      ]
+    },
+    {
+      "name": "Farm Credit Canada",
+      "url": "https://www.fcc-fac.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Financial and banking",
+      "address": "1800 Hamilton St.\nRegina, SK\nS4P 4L3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4500274,
+          -104.6119856
+        ]
+      },
+      "technologies": [
+        "Angular",
+        "Angular.js",
+        "Java",
+        "SAP"
+      ]
+    },
+    {
+      "name": "Offstreet technologies",
+      "url": "http://www.offstreet.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Transportation",
+      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "Express",
+        "Node.js",
+        "AWS",
+        "React Native"
+      ]
+    },
+    {
+      "name": "iQmetrix",
+      "url": "http://www.iqmetrix.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Retail or ecommerce",
+      "address": "700 - 1801 Hamilton St.\nRegina, SK\nS4P 4B4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.450098,
+          -104.609090
+        ]
+      },
+      "technologies": [
+        ".NET",
+        ".NET Core",
+        "C#",
+        "Microsoft Azure",
+        "Microsoft SQL Server",
+        "Node.js",
+        "TypeScript",
+        "React.js",
+        "React Native",
+        "iOS"
+      ]
+    },
+    {
+      "name": "Cova Software",
+      "url": "http://www.covasoftware.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Retail or ecommerce",
+      "address": "700 - 1801 Hamilton St.\nRegina, SK\nS4P 4B4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.450098,
+          -104.609090
+        ]
+      },
+      "technologies": [
+        ".NET",
+        "Android",
+        "Microsoft Azure",
+        "Java",
+        "MongoDB",
+        "Node.js",
+        "Microsoft SQL Server",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "BitCutter Studios",
+      "url": "https://www.bitcutter.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Media, advertising, publishing, or entertainment",
+      "address": "1412 N Benjamin Cr.\nRegina, SK\nS4X 4L3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.501020,
+          -104.663479
+        ]
+      },
+      "technologies": [
+        "Unity 3D",
+        "Autodesk Maya",
+        "Substance by Adobe",
+        "C#",
+        "Node.js",
+        "Ruby",
+        "Ruby on Rails",
+        "Java"
+      ]
+    },
+    {
+      "name": "DOT technologies Corp.",
+      "url": "https://www.seedotrun.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Agriculture",
+      "address": "1 South Plains Road West\nEmerald Park, SK\nS4L 1C6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.445638,
+          -104.412405
+        ]
+      },
+      "sponsorship": "gold",
+      "technologies": [
+        "AWS",
+        "C#",
+        "C",
+        "C++",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "OpenCV",
+        "Python",
+        "Elasticsearch",
+        "React.js",
+        "Serverless"
+      ]
+    },
+    {
+      "name": "Luke Towers Consulting",
+      "url": "https://luketowers.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Web development or design",
+      "address": "5922 Little Pine Loop\nRegina, SK\nS4X 0H5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.5083655,
+          -104.6673616
+        ]
+      },
+      "technologies": [
+        "HTML/CSS",
+        "JavaScript",
+        "Laravel",
+        "OctoberCMS",
+        "PHP",
+        "WordPress"
+      ]
+    },
+    {
+      "name": "Captive Media Inc.",
+      "url": "http://captive.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Marketing",
+      "address": "200 – 1118 Broad St.\nRegina, SK\nS4R 1X8",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4510474,
+          -104.6233122
+        ]
+      },
+      "technologies": [
+        "HTML/CSS",
+        "JavaScript",
+        "Symfony",
+        "BoltCMS",
+        "ExpressionEngine",
+        "Node.js",
+        "CodeIgniter",
+        "Angular",
+        "OctoberCMS",
+        "PHP"
+      ]
+    },
+    {
+      "name": "Shiverware Mobile & IoT Solutions Inc.",
+      "url": "https://shiverware.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Consulting",
+      "address": "105A - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.41533330000001,
+          -104.59035269999998
+        ]
+      },
+      "sponsorship": "bronze",
+      "technologies": [
+        "Android",
+        "HTML/CSS",
+        "iOS",
+        "JavaScript",
+        "Kotlin",
+        "Objective-C",
+        "PHP",
+        "Swift",
+        "WordPress"
+      ]
+    },
+    {
+      "name": "GasBuddy",
+      "url": "https://gasbuddy.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software development - other",
+      "address": "#260 - 10 Research Dr.\nRegina, SK\nS4S 7J7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4134883,
+          -104.5895543
+        ]
+      },
+      "sponsorship": "silver",
+      "technologies": [
+        "Kotlin",
+        "Swift",
+        "Node.js",
+        "JavaScript",
+        "React.js",
+        "Python",
+        "Elasticsearch",
+        "AWS",
+        "Docker",
+        "PostgreSQL",
+        "Kubernetes",
+        "Redis",
+        "R",
+        "Apache Spark",
+        ".NET",
+        "C#"
+      ]
+    },
+    {
+      "name": "Deliverr.ca",
+      "url": "http://www.deliverr.ca",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software development - other",
+      "address": "2151 Albert St.\nRegina, SK\nS4P 2V1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.444602,
+          -104.6178995
+        ]
+      },
+      "technologies": [
+        "Laravel",
+        "Android",
+        "iOS"
+      ]
+    },
+    {
+      "name": "Krugo",
+      "url": "http://krugotravel.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Travel",
+      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        "Swift",
+        "iOS",
+        "Kotlin",
+        "Android",
+        "AWS",
+        "Node.js",
+        "Go",
+        "Angular"
+      ]
+    },
+    {
+      "name": "AlttraSolutions",
+      "url": "http://alttrasolutions.tech/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Financial and banking",
+      "address": "120-10 Reasearch Dr.\nRegina, SK\nS4S 7J7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.413084,
+          -104.589516
+        ]
+      },
+      "technologies": [
+        "JavaScript",
+        "Node.js",
+        "React.js",
+        "Redux",
+        "Express",
+        "Truffle",
+        "Solidity",
+        "AWS",
+        "Python",
+        "Django",
+        "TensorFlow",
+        "Docker",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Celery"
+      ]
+    },
+    {
+      "name": "Melcher Studios",
+      "url": "http://www.melcher.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Media, advertising, publishing, or entertainment",
+      "address": "815 7th Ave #202\nRegina, SK\nS4N 0B3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.458077,
+          -104.592657
+        ]
+      },
+      "technologies": [
+        "HTML/CSS",
+        "JavaScript",
+        ".NET",
+        "Unity 3D",
+        "C#",
+        "PHP",
+        "SQL",
+        "WebGL"
+      ]
+    },
+    {
+      "name": "Brew Ninja",
+      "url": "https://www.brewninja.net",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software as a service (saas) development",
+      "address": "2 Research Drive\nSuite 140\nRegina SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        ".NET",
+        "C#",
+        "React.js",
+        "jQuery",
+        "Microsoft SQL Server",
+        "Microsoft Azure"
+      ]
+    },
+    {
+      "name": "Call The Shot",
+      "url": "https://www.calltheshot.io/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Media, advertising, publishing, or entertainment",
+      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        "React Native",
+        "MySQL",
+        "Koa",
+        "Node.js",
+        "AWS",
+        "Docker"
+      ]
+    },
+    {
+      "name": "DevFacto Technologies Inc.",
+      "url": "https://www.devfacto.com",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software development - other",
+      "address": "#201, Victoria Park Building\n1945 Scarth St\nRegina, SK\nS4P 2H1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4478917,
+          -104.6128621
+        ]
+      },
+      "sponsorship": "silver",
+      "technologies": [
+        "Angular",
+        "Angular.js",
+        "React.js",
+        "C#",
+        ".NET",
+        "JavaScript",
+        "Power BI",
+        "SharePoint",
+        "Microsoft Azure",
+        "iOS",
+        "Android"
+      ]
+    },
+    {
+      "name": "AGT Foods",
+      "url": "http://www.agtfoods.com/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Agriculture",
+      "address": "6200 E. Primrose Green Dr.\nRegina, SK\nS4V 3L7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4294729,
+          -104.4952769
+        ]
+      },
+      "technologies": [
+        "PHP",
+        "Laravel",
+        "Node.js",
+        "Vue.js",
+        "Microsoft Dynamics",
+        "SQL",
+        "Microsoft Azure"
+      ]
+    },
+    {
+      "name": "Stockdales Electric Motor Corp.",
+      "url": "http://www.semc.ca/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Manufacturing",
+      "address": "1441 Fleury St \nRegina, SK \nS4N 7N5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4564301,
+          -104.5777211
+        ]
+      },
+      "technologies": [
+        "Archestra Intouch",
+        "Microsoft SQL Server",
+        "Unity 3D",
+        "FactoryTalk",
+        "AutoCAD"
+      ]
+    },
+    {
+      "name": "SaskPower Enterprise Mobility",
+      "url": "https://jobs.saskpower.com/search/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Energy or utilities",
+      "address": "2025 Victoria Ave\nRegina, SK\nS4P 0S1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.446935,
+          -104.610114
+        ]
+      },
+      "technologies": [
+        "JavaScript",
+        "jQuery",
+        "TypeScript",
+        "Angular",
+        "Node.js",
+        "NestJS",
+        "Docker",
+        "Ionic",
+        "Cordova",
+        "Capactior",
+        "Electron",
+        "Objective-C",
+        "Swift",
+        "iOS",
+        "Java",
+        "Kotlin",
+        "Android",
+        "SAP",
+        "SQL",
+        "AWS",
+        "Microsoft Azure"
+      ]
+    },
+    {
+      "name": "SolusGuard",
+      "url": "https://www.solusguard.com",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software development - other",
+      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        "Python",
+        "Objective-C",
+        "Swift",
+        "Kotlin",
+        "Java",
+        "Flask",
+        "MongoDB",
+        "Docker",
+        "Redis",
+        "Celery",
+        "Android",
+        "iOS",
+        "AWS"
+      ]
+    },
+    {
+      "name": "Four And A Half Giraffes, Ltd.",
+      "url": "https://fourandahalfgiraffes.ca",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Consulting",
+      "address": "3930 Rae Street, Suite 3\nRegina, SK\nS4S 3A2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.431866,
+          -104.621048
+        ]
+      },
+      "technologies": [
+        "React.js",
+        "React Native",
+        "Express",
+        "Node.js",
+        "Docker",
+        "AWS",
+        "Google Cloud Platform",
+        "Objective-C",
+        "Swift",
+        "Android",
+        "Java",
+        "JavaScript",
+        "Raspberry Pi",
+        "Angular.js",
+        "Electron",
+        "Go",
+        "Laravel",
+        "MySQL",
+        "MongoDB",
+        "PHP",
+        "Serverless",
+        "Apache Spark",
+        "Spring"
+      ]
+    },
+    {
+      "name": "Hoolima Software",
+      "url": "https://hoolima.com",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Real estate",
+      "address": "2 Research Drive\nSuite 140\nRegina SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415183,
+          -104.589848
+        ]
+      },
+      "technologies": [
+        "React.js",
+        "React Native",
+        "PostgreSQL",
+        "AWS",
+        "Express",
+        "Docker"
+      ]
+    },
+    {
+      "name": "Toolshed",
+      "url": "http://www.toolshed.io/",
+      "image": null,
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "industry": "Software development - other",
+      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.415232,
+          -104.590410
+        ]
+      },
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "Express",
+        "NestJS",
+        "Node.js",
+        "AWS"
+      ]
+    }
+  ]
+}

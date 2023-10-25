@@ -61,7 +61,9 @@ export const Navbar = () => {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
-            <Logo />
+            <Link href='/'>
+              <Logo />
+            </Link>
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -270,7 +272,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'View Map',
-    href: '/map',
+    href: '/techmap',
   },
   {
     label: 'Find Work',

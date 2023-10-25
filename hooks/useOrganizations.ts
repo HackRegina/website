@@ -6,6 +6,7 @@ import { generateQueryKey } from '../utils/generateQueryKey'
 interface IFetchOrganizations {
   sponsors: IOrganization[]
   partners: IOrganization[]
+  organizations: IOrganization[]
 }
 
 export const useOrganizations = (): IFetchOrganizations => {
@@ -13,5 +14,5 @@ export const useOrganizations = (): IFetchOrganizations => {
     generateQueryKey({ key: 'organizations', query: {} }),
     fetchOrganizations,
   )
-  return { sponsors: data?.sponsors || [], partners: data?.partners || [] }
+  return { sponsors: data?.sponsors || [], partners: data?.partners || [], organizations: data?.organizations || [] }
 }

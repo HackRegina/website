@@ -12,6 +12,11 @@ export enum SponsorTierEnum {
 export type SponsorTier = keyof typeof SponsorTierEnum
 export const SponsorTierValues = Object.values(SponsorTierEnum) as SponsorTier[]
 
+interface Geometry {
+  type: 'Point'
+  coordinates: [number, number]
+}
+
 export interface IOrganization {
   name: string
   url: string
@@ -19,4 +24,8 @@ export interface IOrganization {
   is_partner: boolean
   is_sponsor: boolean
   sponsor_tier: SponsorTier | null
+  industry: string | null
+  address: string | null
+  geometry: Geometry | null
+  technologies: string[]
 }
