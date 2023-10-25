@@ -1,4 +1,4 @@
-interface WebsiteDetails {
+export interface WebsiteDetails {
   title?: string
   description?: string
   image?: string

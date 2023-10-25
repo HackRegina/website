@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { WebsiteDetails } from '../interfaces/website-details'
 import { generateQueryKey } from '../utils/generateQueryKey'
 
 export const useWebsiteDetails = ({ url }: { url: string }) => {
