@@ -159,6 +159,7 @@ const OrganizationCard = ({ name, url, image }: Pick<IOrganization, 'name' | 'ur
             alt={name}
             style={{
               maxHeight: 200,
+              width: '100%',
               filter:
                 colorMode === 'dark' && !image.dark
                   ? 'brightness(0.7) invert(1) grayscale(1)'

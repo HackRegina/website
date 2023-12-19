@@ -30,9 +30,20 @@
         "light": "/images/innovation-sk-light.png",
         "dark": "/images/innovation-sk-dark.png"
       },
-      "is_partner": true,
-      "is_sponsor": false,
-      "sponsor_tier": null
+      "is_partner": false,
+      "is_sponsor": true,
+      "sponsor_tier": "platinum"
+    },
+    {
+      "name": "Dev Pro",
+      "url": "https://www.dev-pro.ca",
+      "image": {
+        "light": "/images/dev-pro-light.svg",
+        "dark": "/images/dev-pro-dark.svg"
+      },
+      "is_partner": false,
+      "is_sponsor": true,
+      "sponsor_tier": "platinum"
     },
     {
       "name": "Vivvo Application Studios",
