@@ -276,10 +276,10 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Find Work',
-    href: '/jobs',
+    href: 'https://old.hackregina.com/#/jobs',
   },
   {
     label: 'Survey',
-    href: 'survey',
+    href: 'https://old.hackregina.com/survey/#/',
   },
 ]
