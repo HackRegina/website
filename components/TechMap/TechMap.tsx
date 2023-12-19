@@ -402,7 +402,10 @@ const CompanyView = ({
       top={0}
       bottom={0}
       left={0}
-      width={'33%'}
+      width={{
+        base: '100%',
+        md: '33%',
+      }}
       borderRadius={'1rem'}
       paddingX={'1rem'}
       paddingY={'1.5rem'}

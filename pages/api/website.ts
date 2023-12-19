@@ -30,8 +30,13 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const isIconFullUrl = iconRaw?.startsWith('http') || false
     // remove slash at the end of url
     url = url.endsWith('/') ? url.slice(0, -1) : url
-    const image = isImageFullUrl || !imageRaw ? imageRaw : `${url}${imageRaw}`
-    const icon = isIconFullUrl || !iconRaw ? iconRaw : `${url}${iconRaw}`
+    const separator =
+      url.endsWith('/') &&
+      ((imageRaw && imageRaw.startsWith('/')) || (iconRaw && iconRaw.startsWith('/')))
+        ? ''
+        : '/'
+    const image = isImageFullUrl || !imageRaw ? imageRaw : `${url}${separator}${imageRaw}`
+    const icon = isIconFullUrl || !iconRaw ? iconRaw : `${url}${separator}${iconRaw}`
     res.status(200).json({
       title,
       description,
