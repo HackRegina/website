@@ -39,8 +39,9 @@ export const Organizations = ({
     ? (Object.keys(organizationsByTiers) as SponsorTier[])
     : []
   const hasTiers = tiers.length > 0
+  const id = title.toLowerCase().replace(/ /g, '-')
   return (
-    <Container maxW={'7xl'} id="partners" mb={60}>
+    <Container maxW={'7xl'} id={id} mb={60}>
       <Stack
         flex={1}
         spacing={{ base: 5, md: 10 }}
@@ -82,13 +83,15 @@ export const Organizations = ({
       </Stack>
       {!hasTiers && (
         <Wrap justify="center" spacingX={40} spacingY={20} mt="20">
-          {organizations.map(({ name, url, image }: IOrganization) => (
-            <WrapItem key={name} w={{ base: '100%', md: '33.3%' }}>
-              <Center>
-                <OrganizationCard name={name} url={url} image={image} />
-              </Center>
-            </WrapItem>
-          ))}
+          {organizations
+            .filter((org) => !org.is_hidden)
+            .map(({ name, url, image }: IOrganization) => (
+              <WrapItem key={name} w={{ base: '100%', md: '33.3%' }} justifyContent="center">
+                <Center>
+                  <OrganizationCard name={name} url={url} image={image} />
+                </Center>
+              </WrapItem>
+            ))}
         </Wrap>
       )}
       {hasTiers &&
@@ -103,17 +106,18 @@ export const Organizations = ({
                 mt="20"
                 mb="10"
               >
-                <TierIcon tier={tier} />{' '}
-                {tier.charAt(0).toUpperCase() + tier.slice(1)}s
+                <TierIcon tier={tier} /> {tier.charAt(0).toUpperCase() + tier.slice(1)}s
               </Heading>
               <Wrap justify="center" spacingX={40} spacingY={10} mb="20">
-                {(organizationsByTiers as any)[tier].map(({ name, url, image }: IOrganization) => (
-                  <WrapItem key={name} w={getColumnWidth({ tier })}>
-                    <Center>
-                      <OrganizationCard name={name} url={url} image={image} />
-                    </Center>
-                  </WrapItem>
-                ))}
+                {organizationsByTiers[tier]
+                  .filter((org) => !org.is_hidden)
+                  .map(({ name, url, image }: IOrganization) => (
+                    <WrapItem key={name} w={getColumnWidth({ tier })} justifyContent="center">
+                      <Center>
+                        <OrganizationCard name={name} url={url} image={image} />
+                      </Center>
+                    </WrapItem>
+                  ))}
               </Wrap>
             </Fragment>
           ))}

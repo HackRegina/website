@@ -22,6 +22,7 @@ export const fetchOrganizations = async ({}: Object = {}): Promise<OrganizationR
         : null,
       is_partner: org.is_partner,
       is_sponsor: org.is_sponsor,
+      is_hidden: !!org.is_hidden,
       sponsor_tier: SponsorTierValues.find((tier) => tier === org.sponsor_tier) || null,
       industry: org.industry || null,
       address: org.address || null,

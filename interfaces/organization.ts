@@ -23,6 +23,7 @@ export interface IOrganization {
   image: IOrganizationImage | null
   is_partner: boolean
   is_sponsor: boolean
+  is_hidden: boolean
   sponsor_tier: SponsorTier | null
   industry: string | null
   address: string | null

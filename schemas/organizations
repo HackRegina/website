@@ -35,6 +35,9 @@
           "is_sponsor": {
             "type": "boolean"
           },
+          "is_hidden": {
+            "type": "boolean"
+          },
           "sponsor_tier": {},
           "industry": {
             "type": "string"

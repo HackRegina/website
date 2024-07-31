@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/HackRegina/website/main/schema/organizations.schema.json",
+  "$schema": "https://raw.githubusercontent.com/HackRegina/website/main/schemas/organizations",
   "items": [
     {
       "name": "Cultivator",
@@ -32,6 +32,7 @@
       },
       "is_partner": false,
       "is_sponsor": true,
+      "is_hidden": true,
       "sponsor_tier": "platinum"
     },
     {
