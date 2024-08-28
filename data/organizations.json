@@ -99,28 +99,29 @@
       ]
     },
     {
-      "name": "Offstreet technologies",
-      "url": "http://www.offstreet.ca/",
-      "image": null,
+      "name": "Offstreet",
+      "url": "https://www.joinoffstreet.com/",
+      "image": {
+        "light": "/images/offstreet-light.svg",
+        "dark": "/images/offstreet-dark.svg"
+      },
       "is_partner": false,
       "is_sponsor": false,
       "sponsor_tier": null,
       "industry": "Transportation",
-      "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
+      "address": " 2375 College Ave\nRegina, SK\nS4P 0S8",
       "geometry": {
         "type": "Point",
         "coordinates": [
-          50.415232,
-          -104.590410
+          50.44044108705784, 
+          -104.61253572692995
         ]
       },
       "technologies": [
-        "Angular",
+        "React",
         "TypeScript",
-        "Express",
         "Node.js",
-        "AWS",
-        "React Native"
+        "AWS"
       ]
     },
     {
