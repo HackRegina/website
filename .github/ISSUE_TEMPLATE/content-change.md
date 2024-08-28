@@ -3,7 +3,7 @@ name: Content change
 about: Update something that looks out of date
 title: ''
 labels: ''
-assignees: DJCrossman
+assignees: ''
 
 ---
 
