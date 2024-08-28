@@ -36,7 +36,7 @@
       "sponsor_tier": "platinum"
     },
     {
-      "name": "Dev Pro",
+      "name": "DevPro Software Consulting Inc.",
       "url": "https://www.dev-pro.ca",
       "image": {
         "light": "/images/dev-pro-light.svg",
@@ -44,7 +44,25 @@
       },
       "is_partner": false,
       "is_sponsor": true,
-      "sponsor_tier": "platinum"
+      "sponsor_tier": "platinum",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.4452,
+          -104.6189
+        ]
+      },
+      "technologies": [
+        "Java",
+        "Spring",
+        "Spring Boot",
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "AWS",
+        "HTML/CSS",
+        "PostgreSQL"
+      ]
     },
     {
       "name": "Vivvo Application Studios",
