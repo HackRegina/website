@@ -1,7 +1,7 @@
 .container {
   padding: 0 2rem;
+  overflow-x:hidden;
 }
-
 .main {
   min-height: 100vh;
   padding: 4rem 0;
