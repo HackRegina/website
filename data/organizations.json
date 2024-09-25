@@ -132,7 +132,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          50.44044108705784, 
+          50.44044108705784,
           -104.61253572692995
         ]
       },
@@ -781,6 +781,44 @@
         "NestJS",
         "Node.js",
         "AWS"
+      ]
+    },
+    {
+      "name": "Open Path Partners",
+      "url": "https://openpathpartners.com/",
+      "image": {
+        "light": "/images/open-path-partners-neutral.svg",
+        "dark": "/images/open-path-partners-neutral.svg"
+      },
+      "is_partner": false,
+      "is_sponsor": false,
+      "sponsor_tier": null,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.499400,
+          -104.611050
+        ]
+      },
+      "technologies": [
+        "Azure",
+        "AWS",
+        "SQL",
+        "Python",
+        "R",
+        "C#",
+        "Kotlin",
+        "Java",
+        "Rust",
+        "F#",
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS",
+        "React",
+        "VueJs",
+        "AstroJs",
+        "Unity",
+        "Docker/k8s"
       ]
     }
   ]
