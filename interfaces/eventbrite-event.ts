@@ -1,4 +1,5 @@
 export interface IEventbriteEvent {
+  status: 'draft' | 'live'
   name: {
     text: string
   }
@@ -16,5 +17,8 @@ export interface IEventbriteEvent {
       address_2?: string
       city: string
     }
+  }
+  logo: {
+    url: string
   }
 }

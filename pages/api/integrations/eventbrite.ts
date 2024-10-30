@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { fetchEvent } from '../../../fetch/event'
+import { fetchEventByUrl } from '../../../fetch/events'
 import { sendMessage } from '../../../fetch/sendMessage'
 import { createEventMessage } from '../../../utils/createEventMessage'
 
@@ -9,7 +9,7 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { query, body } = req
     if (query.secret !== secret) throw new Error('Invalid secret')
     const channel = 'events'
-    const { event } = await fetchEvent({ url: body.api_url })
+    const { event } = await fetchEventByUrl({ url: body.api_url })
     await sendMessage({ channel, text: createEventMessage(event) })
     res.status(200).json({ message: 'Successfully sent message' })
   } catch (e) {
