@@ -1,4 +1,4 @@
-export interface Venue {
+interface Venue {
   place_name: string
   address_1: string
   address_2: string
@@ -13,8 +13,9 @@ export interface Venue {
   localized_multi_line_address_display: string[]
 }
 
-interface IDraftEvent {
-  name: 'TBA'
+export interface IDraftEvent {
+  id: string
+  name: string
   status: 'draft'
   start: number
   end: number
@@ -23,7 +24,8 @@ interface IDraftEvent {
   venue?: Venue
 }
 
-interface ILiveEvent {
+export interface ILiveEvent {
+  id: string
   name: string
   status: 'live'
   start: number
@@ -36,4 +38,6 @@ interface ILiveEvent {
 
 export type IEvent = IDraftEvent | ILiveEvent
 
-export interface IEventResponse {}
+export interface IEventResponse {
+  data: IEvent[]
+}

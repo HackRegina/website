@@ -38,11 +38,12 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
       const venue = venueMap.get(event.venue_id)
       if (event.status === 'draft') {
         return {
-          name: 'TBA',
+          id: event.id,
+          name: event.name.text,
           status: 'draft',
           start: Date.parse(event.start.local),
           end: Date.parse(event.end.local),
-          summary: event.name.text,
+          summary: event.description.text,
           image: event.logo ? event.logo.url : '',
           venue: venue && {
             place_name: venue.name || 'TBA',
@@ -51,12 +52,13 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
         }
       }
       return {
+        id: event.id,
         name: event.name.text,
         status: 'live',
         start: Date.parse(event.start.local),
         end: Date.parse(event.end.local),
         url: event.url,
-        summary: event.name.text,
+        summary: event.description.text,
         image: event.logo ? event.logo.url : '',
         venue: venue && {
           place_name: venue.name || 'TBA',

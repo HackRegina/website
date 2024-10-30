@@ -275,6 +275,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/techmap',
   },
   {
+    label: 'Events',
+    href: '/events'
+  },
+  {
     label: 'Find Work',
     href: 'https://old.hackregina.com/#/jobs',
   },

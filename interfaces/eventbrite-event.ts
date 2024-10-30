@@ -1,6 +1,10 @@
 export interface IEventbriteEvent {
+  id: string
   status: 'draft' | 'live'
   name: {
+    text: string
+  }
+  description: {
     text: string
   }
   url: string

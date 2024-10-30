@@ -202,7 +202,7 @@ export const Members = ({ members }: IProps) => {
                                 transform: 'translate(-50%)',
                               }}
                             >
-                              <p
+                              <Text
                                 style={{
                                   fontWeight: '700',
                                   whiteSpace: 'nowrap',
@@ -210,7 +210,7 @@ export const Members = ({ members }: IProps) => {
                                 }}
                               >
                                 {circle.data.display_name || circle.data.username}
-                              </p>
+                              </Text>
                             </Flex>
                           </Box>
                         )
