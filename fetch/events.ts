@@ -20,9 +20,22 @@ export const fetchEventByUrl = async ({ url }: { url?: string } = {}): Promise<I
 export const fetchEvents = async ({ time_filter }: { time_filter: 'current_future' | 'past' }): Promise<IEventResponse> => {
   if (!token) throw new Error('No token provided')
   const response = await fetch(`https://www.eventbriteapi.com/v3/organizations/168322805152/events?token=${token}&time_filter=${time_filter}`)
-  const { events = [], ...rest } = await response.json()
+  const { events = [] } = await response.json()
+  const venueMap = new Map()
+  await Promise.all(events.reduce((venueIds: string[], event: IEventbriteEvent) => venueIds.includes(event.venue_id) ? venueIds : [...venueIds, event.venue_id], []).map(async (venueId: string) => {
+    try {
+      if (!venueMap.has(venueId)) {
+        const venueResponse = await fetch(`https://www.eventbriteapi.com/v3/venues/${venueId}?token=${token}`)
+        const venue = await venueResponse.json()
+        venueMap.set(venueId, venue)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }))
   return {
-    data: events.map((event: IEventbriteEvent): IEvent => {
+    data: await Promise.all(events.map(async (event: IEventbriteEvent): Promise<IEvent> => {
+      const venue = venueMap.get(event.venue_id)
       if (event.status === 'draft') {
         return {
           name: 'TBA',
@@ -31,6 +44,10 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
           end: Date.parse(event.end.local),
           summary: event.name.text,
           image: event.logo ? event.logo.url : '',
+          venue: venue && {
+            place_name: venue.name || 'TBA',
+            ...venue.address,
+          }
         }
       }
       return {
@@ -41,7 +58,11 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
         url: event.url,
         summary: event.name.text,
         image: event.logo ? event.logo.url : '',
+        venue: venue && {
+          place_name: venue.name || 'TBA',
+          ...venue.address,
+        }
       }
-    }),
+    })),
   }
 }

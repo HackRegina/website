@@ -18,6 +18,7 @@ export interface IEventbriteEvent {
       city: string
     }
   }
+  venue_id: string
   logo: {
     url: string
   }

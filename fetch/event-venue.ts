@@ -1,1 +1,0 @@
-https://www.eventbriteapi.com/v3/venues/venue_id/
