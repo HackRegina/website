@@ -19,6 +19,8 @@ import Map, { Marker, ViewState } from 'react-map-gl'
 import { useWebsiteDetails } from '../../hooks/useWebsiteDetails'
 import { IOrganization } from '../../interfaces/organization'
 
+const { MAPBOX_ACCESS_TOKEN } = process.env
+
 type View = 'technologies' | 'companies'
 interface Technology {
   name: string
@@ -73,9 +75,11 @@ export const TechMap = ({ organizations }: { organizations: IOrganization[] }) =
       c.technologies.some((t) => filteredTechnologies.includes(t)),
   )
 
+  if (!MAPBOX_ACCESS_TOKEN) return null
+
   return (
     <Map
-      mapboxAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
+      mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
       initialViewState={DefaultState}
       style={{ width: '100%', height: '90vh', borderRadius: '1rem' }}
       maxBounds={[
