@@ -10,9 +10,11 @@ export interface IEventbriteEvent {
   url: string
   start: {
     local: string
+    timezone: string
   }
   end: {
     local: string
+    timezone: string
   }
   venue: {
     name: string

@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon'
 import { IEvent, IEventResponse } from '../interfaces/event'
 import { IEventbriteEvent } from '../interfaces/eventbrite-event'
 
@@ -41,8 +42,8 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
           id: event.id,
           name: event.name.text,
           status: 'draft',
-          start: Date.parse(event.start.local),
-          end: Date.parse(event.end.local),
+          start: DateTime.fromISO(event.start.local, { zone: event.start.timezone }).toMillis(),
+          end: DateTime.fromISO(event.end.local, { zone: event.end.timezone }).toMillis(),
           summary: event.description.text,
           image: event.logo ? event.logo.url : '',
           venue: venue && {
@@ -55,8 +56,8 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
         id: event.id,
         name: event.name.text,
         status: 'live',
-        start: Date.parse(event.start.local),
-        end: Date.parse(event.end.local),
+        start: DateTime.fromISO(event.start.local, { zone: event.start.timezone }).toMillis(),
+        end: DateTime.fromISO(event.end.local, { zone: event.end.timezone }).toMillis(),
         url: event.url,
         summary: event.description.text,
         image: event.logo ? event.logo.url : '',
