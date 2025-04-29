@@ -15,7 +15,7 @@
             "type": "string"
           },
           "image": {
-            "type": "object",
+            "type": ["object", "null"],
             "properties": {
               "light": {
                 "type": "string"
@@ -38,7 +38,15 @@
           "is_hidden": {
             "type": "boolean"
           },
-          "sponsor_tier": {},
+          "sponsor_tier": {
+            "type": ["string", "null"],
+            "enum": [
+              "fan",
+              "supporter",
+              "promotor",
+              "champion"
+            ]
+          },
           "industry": {
             "type": "string"
           },

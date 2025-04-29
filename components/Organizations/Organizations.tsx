@@ -145,8 +145,8 @@ const getColumnWidth = ({ tier }: { tier: SponsorTier }) => {
     case 'champion':
       return { base: 'calc(100% - 20px)', md: 'calc(33.3% - 20px)' }
     case 'promotor':
-      return { base: 'calc(50% - 20px)', md: 'calc(16.6% - 20px)' }
     case 'supporter':
+      return { base: 'calc(50% - 20px)', md: 'calc(16.6% - 20px)' }
     default:
       return { base: 'calc(33.3% - 20px)', md: 'calc(10% - 20px)' }
   }

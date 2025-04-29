@@ -19,7 +19,7 @@
         "light": "/images/tandem-x-visuals-light.png",
         "dark": "/images/tandem-x-visuals-dark.png"
       },
-      "is_partner": true,
+      "is_partner": false,
       "is_sponsor": false,
       "sponsor_tier": null
     },
@@ -32,8 +32,8 @@
       },
       "is_partner": false,
       "is_sponsor": true,
-      "is_hidden": true,
-      "sponsor_tier": "platinum"
+      "is_hidden": false,
+      "sponsor_tier": "champion"
     },
     {
       "name": "DevPro Software Consulting Inc.",
@@ -43,8 +43,8 @@
         "dark": "/images/dev-pro-dark.svg"
       },
       "is_partner": false,
-      "is_sponsor": true,
-      "sponsor_tier": "platinum",
+      "is_sponsor": false,
+      "sponsor_tier": null,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -81,7 +81,6 @@
           -104.611938
         ]
       },
-      "sponsorship": "platinum",
       "technologies": [
         "Angular",
         "Angular.js",
@@ -125,8 +124,8 @@
         "dark": "/images/offstreet-dark.svg"
       },
       "is_partner": false,
-      "is_sponsor": false,
-      "sponsor_tier": null,
+      "is_sponsor": true,
+      "sponsor_tier": "supporter",
       "industry": "Transportation",
       "address": " 2375 College Ave\nRegina, SK\nS4P 0S8",
       "geometry": {
@@ -790,9 +789,9 @@
         "light": "/images/open-path-partners-neutral.svg",
         "dark": "/images/open-path-partners-neutral.svg"
       },
-      "is_partner": false,
-      "is_sponsor": false,
-      "sponsor_tier": null,
+      "is_partner": true,
+      "is_sponsor": true,
+      "sponsor_tier": "supporter",
       "geometry": {
         "type": "Point",
         "coordinates": [
