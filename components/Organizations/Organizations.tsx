@@ -38,7 +38,8 @@ export const Organizations = ({
   const tiers: SponsorTier[] = organizationsByTiers
     ? (Object.keys(organizationsByTiers) as SponsorTier[])
     : []
-  const hasTiers = tiers.length > 0
+  const isAllPartners = organizations.every((org) => org.is_partner)
+  const hasTiers = tiers.length > 0 && !isAllPartners
   const id = title.toLowerCase().replace(/ /g, '-')
   return (
     <Container maxW={'7xl'} id={id} mb={60}>
