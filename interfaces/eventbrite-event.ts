@@ -28,4 +28,7 @@ export interface IEventbriteEvent {
   logo: {
     url: string
   }
+  sales_data_with_null?: {
+    max_possible_ticket_sales: number
+  }
 }

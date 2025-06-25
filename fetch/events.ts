@@ -20,7 +20,7 @@ export const fetchEventByUrl = async ({ url }: { url?: string } = {}): Promise<I
 
 export const fetchEvents = async ({ time_filter }: { time_filter: 'current_future' | 'past' }): Promise<IEventResponse> => {
   if (!token) throw new Error('No token provided')
-  const response = await fetch(`https://www.eventbriteapi.com/v3/organizations/168322805152/events?token=${token}&time_filter=${time_filter}`)
+  const response = await fetch(`https://www.eventbriteapi.com/v3/organizations/168322805152/events?token=${token}&time_filter=${time_filter}&expand=sales_data_with_null`)
   const { events = [] } = await response.json()
   const venueMap = new Map()
   await Promise.all(events.reduce((venueIds: string[], event: IEventbriteEvent) => venueIds.includes(event.venue_id) ? venueIds : [...venueIds, event.venue_id], []).map(async (venueId: string) => {
@@ -35,7 +35,7 @@ export const fetchEvents = async ({ time_filter }: { time_filter: 'current_futur
     }
   }))
   return {
-    data: await Promise.all(events.map(async (event: IEventbriteEvent): Promise<IEvent> => {
+    data: await Promise.all(events.filter((e: IEventbriteEvent) => e.sales_data_with_null?.max_possible_ticket_sales).map(async (event: IEventbriteEvent): Promise<IEvent> => {
       const venue = venueMap.get(event.venue_id)
       if (event.status === 'draft') {
         return {
