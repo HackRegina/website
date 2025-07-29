@@ -1,4 +1,4 @@
-import { ArrowBackIcon, SearchIcon, SmallCloseIcon } from '@chakra-ui/icons'
+import { MoveLeft as ArrowBackIcon, SearchIcon, XIcon } from 'lucide-react'
 import {
   Badge,
   Box,
@@ -47,8 +47,8 @@ export const TechMap = ({ organizations }: { organizations: IOrganization[] }) =
   const filteredTechnologies: string[] = Array.isArray(query.technologies)
     ? query.technologies
     : typeof query.technologies === 'string'
-    ? [query.technologies]
-    : []
+      ? [query.technologies]
+      : []
   const selectedCompanySlug: string | undefined = Array.isArray(query.company)
     ? query.company[0]
     : query.company
@@ -101,10 +101,10 @@ export const TechMap = ({ organizations }: { organizations: IOrganization[] }) =
         onClick={() => setIsShowingMenu((prev) => !prev)}
         display={{
           base: 'block',
-          md:isShowingMenu ? 'none' : 'block',
+          md: isShowingMenu ? 'none' : 'block',
         }}
       >
-        {isShowingMenu ? <SmallCloseIcon /> : <SearchIcon />}
+        {isShowingMenu ? <XIcon /> : <SearchIcon />}
       </Button>
       {!!selectedCompany && isShowingMenu && (
         <CompanyView colorMode={colorMode} query={query} company={selectedCompany} />
@@ -196,7 +196,11 @@ const SelectView = ({ colorMode }: { colorMode: ColorMode }) => (
     paddingY={'1.5rem'}
   >
     <Heading as="h4" size="md" marginBottom={'1rem'}>
-      <SearchIcon marginX={'0.5rem'} />
+      <SearchIcon
+        style={{
+          marginRight: '0.5rem',
+          marginLeft: '0.5rem'
+        }} />
       Tech map
     </Heading>
     <Button
@@ -274,7 +278,12 @@ const TechnologiesSelect = ({ colorMode, companies, technologies, query }: Selec
             query: {},
           }}
         >
-          <ArrowBackIcon marginX={'0.5rem'} />
+          <ArrowBackIcon
+            style={{
+              marginRight: '0.5rem',
+              marginLeft: '0.5rem',
+            }}
+          />
         </Link>
         Technologies
       </Heading>
@@ -358,7 +367,12 @@ const CompaniesSelect = ({ colorMode, companies, technologies }: SelectViewProps
           query: { view: 'technologies' },
         }}
       >
-        <ArrowBackIcon marginX={'0.5rem'} />
+        <ArrowBackIcon
+          style={{
+            marginRight: '0.5rem',
+            marginLeft: '0.5rem',
+          }}
+        />
       </Link>
       Companies
     </Heading>
@@ -421,7 +435,12 @@ const CompanyView = ({
             query: { ...query, company: undefined },
           }}
         >
-          <ArrowBackIcon marginX={'0.5rem'} />
+          <ArrowBackIcon
+            style={{
+              marginRight: '0.5rem',
+              marginLeft: '0.5rem',
+            }}
+          />
         </Link>
         {company.name}
       </Heading>

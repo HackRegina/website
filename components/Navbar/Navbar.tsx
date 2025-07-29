@@ -1,11 +1,11 @@
 import {
   ChevronDownIcon,
   ChevronRightIcon,
-  CloseIcon,
-  HamburgerIcon,
+  XIcon,
+  MenuIcon,
   MoonIcon,
   SunIcon,
-} from '@chakra-ui/icons'
+} from 'lucide-react'
 import {
   Box,
   Button,
@@ -50,7 +50,7 @@ export const Navbar = () => {
         >
           <IconButton
             onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+            icon={isOpen ? <XIcon /> : <MenuIcon />}
             variant={'ghost'}
             aria-label={'Toggle Navigation'}
           />
@@ -199,11 +199,11 @@ const MobileNav = () => {
         <Button onClick={toggleColorMode}>
           {colorMode === 'light' ? (
             <>
-              <MoonIcon mr="0.5rem" /> Dark mode
+              <MoonIcon style={{ marginRight: '0.5rem' }} /> Dark mode
             </>
           ) : (
             <>
-              <SunIcon  mr="0.5rem" /> Light mode
+              <SunIcon style={{ marginRight: '0.5rem' }} /> Light mode
             </>
           )}
         </Button>
@@ -231,12 +231,13 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           {label}
         </Text>
         {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
+          <ChevronDownIcon
+            style={{
+              transition: 'all .25s ease-in-out',
+              transform: isOpen ? 'rotate(180deg)' : '',
+              width: '6',
+              height: '6',
+            }}
           />
         )}
       </Flex>
