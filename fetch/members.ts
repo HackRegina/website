@@ -1,26 +1,42 @@
-import { UsersListResponse, WebClient } from '@slack/web-api'
-import { ICommunityMember } from '../interfaces/community-member'
+import { type UsersListResponse, WebClient } from '@slack/web-api';
 
-const token = process.env.SLACK_TOKEN
+const token = process.env.SLACK_TOKEN;
 
-export interface MemberResponse {
-  members: ICommunityMember[]
-  cursor: string | null
+export interface ICommunityMember {
+  user_id: string;
+  team_id: string;
+  username: string;
+  is_primary_owner: boolean;
+  is_owner: boolean;
+  is_admin: boolean;
+  display_name: string;
+  image_1024?: string;
+  image_192?: string;
+  image_24?: string;
+  image_32?: string;
+  image_48?: string;
+  image_512?: string;
+  image_72?: string;
+  image_original?: string;
+  color?: string;
 }
 
-export const fetchMembers = async ({
-  cursor,
-}: { cursor?: string } = {}): Promise<MemberResponse> => {
-  if (!token) return { members: [], cursor: null }
-  const web = new WebClient(token)
-  const {
-    members = [],
-    response_metadata: meta,
-    ...resp
-  }: UsersListResponse = await web.users.list({
+export interface MemberResponse {
+  members: ICommunityMember[];
+  cursor: string | null;
+}
+
+type FetchMembersRequest = {
+  cursor?: string;
+};
+
+export const fetchMembers = async ({ cursor }: FetchMembersRequest = {}) => {
+  if (!token) return { members: [], cursor: null };
+  const web = new WebClient(token);
+  const { members = [], response_metadata: meta }: UsersListResponse = await web.users.list({
     limit: 100,
     cursor,
-  })
+  });
   return {
     members: members.map(
       (member): ICommunityMember => ({
@@ -43,5 +59,5 @@ export const fetchMembers = async ({
       }),
     ),
     cursor: meta?.next_cursor || null,
-  }
-}
+  };
+};

@@ -1,25 +1,25 @@
-import { Interval, DateTime } from "luxon";
-import { IEventbriteEvent } from "../interfaces/eventbrite-event";
+import { DateTime, Interval } from 'luxon';
+import type { IEventbriteEvent } from '@/fetch/events';
 
 export const createEventMessage = (event: IEventbriteEvent): string => {
-  let formattedDate = Interval.fromDateTimes(
+  const formattedDate = Interval.fromDateTimes(
     DateTime.fromISO(event.start.local),
-    DateTime.fromISO(event.end.local)
+    DateTime.fromISO(event.end.local),
   ).toLocaleString({
     ...DateTime.DATE_HUGE,
     ...DateTime.TIME_SIMPLE,
   });
-  let formattedAddress = event.venue && event.venue.address
+  const formattedAddress = event.venue?.address
     ? [
-      event.venue.name,
-      event.venue.address.address_1,
-      event.venue.address.address_2,
-      event.venue.address.city,
-    ]
-      .filter((a) => !!a)
-      .join(', ')
+        event.venue.name,
+        event.venue.address.address_1,
+        event.venue.address.address_2,
+        event.venue.address.city,
+      ]
+        .filter((a) => !!a)
+        .join(', ')
     : `TBA`;
-  let randomGreetings = [
+  const randomGreetings = [
     `Hey <!here>, There is a cool event happening soon!`,
     `<!here> As a bot, I am programmed to be excited to annouce that there is a event happening in the tech community.`,
     `Hackbot here, happy to invite <!here> to another great event!`,

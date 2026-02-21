@@ -1,18 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchOrganizations } from '../fetch/organizations'
-import { IOrganization } from '../interfaces/organization'
-import { generateQueryKey } from '../utils/generateQueryKey'
+import { useQuery } from '@tanstack/react-query';
+import { fetchOrganizations } from '@/fetch/organizations';
+import { generateQueryKey } from '@/utils/generateQueryKey';
 
-interface IFetchOrganizations {
-  sponsors: IOrganization[]
-  partners: IOrganization[]
-  organizations: IOrganization[]
-}
+export const useOrganizations = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: generateQueryKey({ key: 'organizations', query: {} }),
+    queryFn: fetchOrganizations,
+  });
 
-export const useOrganizations = (): IFetchOrganizations => {
-  const { data } = useQuery(
-    generateQueryKey({ key: 'organizations', query: {} }),
-    fetchOrganizations,
-  )
-  return { sponsors: data?.sponsors || [], partners: data?.partners || [], organizations: data?.organizations || [] }
-}
+  return {
+    data: data?.organizations || [],
+    isLoading,
+  };
+};

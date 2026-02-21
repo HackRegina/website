@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
-import { useMemo } from 'react'
-import { MemberResponse } from '../fetch/members'
-import { generateQueryKey } from '../utils/generateQueryKey'
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import type { MemberResponse } from '@/fetch/members';
+import { generateQueryKey } from '@/utils/generateQueryKey';
 
 export const useMembers = () => {
   const {
@@ -11,41 +11,42 @@ export const useMembers = () => {
     isLoading,
     fetchNextPage,
     hasNextPage = false,
-  } = useInfiniteQuery<MemberResponse>(
-    generateQueryKey({ key: 'members', query: { cursor: null } }),
-    async ({ pageParam: { cursor = null } = {} }) => {
+  } = useInfiniteQuery<MemberResponse>({
+    queryKey: generateQueryKey({ key: 'members', query: { cursor: null } }),
+    queryFn: async ({ pageParam = null }) => {
+      const cursor = pageParam as string | null;
       const query = cursor
         ? new URLSearchParams({
             cursor: cursor,
           })
-        : undefined
-      const response = await fetch('/api/members' + (query ? `?${query}` : ''))
-      return await response.json()
+        : undefined;
+      const response = await fetch(`/api/members${query ? `?${query}` : ''}`);
+      return await response.json();
     },
+    getNextPageParam: (resp: MemberResponse) => {
+      return resp.cursor || undefined;
+    },
+    getPreviousPageParam: (resp: MemberResponse) => {
+      return resp.cursor || undefined;
+    },
+    initialPageParam: null,
+  });
 
-    {
-      getNextPageParam: (resp: MemberResponse): { cursor?: string | null } => {
-        return { cursor: resp.cursor }
-      },
-      getPreviousPageParam: (resp: MemberResponse): { cursor?: string | null } => {
-        return { cursor: resp.cursor }
-      },
-    },
-  )
   if (!(isFetching || isFetchingNextPage || isLoading) && hasNextPage) {
-    fetchNextPage()
+    fetchNextPage();
   }
+
   const members = useMemo(() => {
-    let seen = new Set()
+    const seen = new Set();
     return (
       data?.pages
-        ?.map(({ members }) => members)
-        ?.flat()
+        ?.flatMap(({ members }) => members)
         .filter((item) => {
-          let k = item.user_id
-          return seen.has(k) ? false : seen.add(k)
+          const k = item.user_id;
+          return seen.has(k) ? false : seen.add(k);
         }) || []
-    )
-  }, [data?.pages])
-  return { members }
-}
+    );
+  }, [data?.pages]);
+
+  return { data: members, isLoading };
+};

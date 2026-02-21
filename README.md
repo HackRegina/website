@@ -1,58 +1,154 @@
+# HackRegina Website
+
+The official website for HackRegina - Regina's tech community hub.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (Pages Router)
+- **Styling**: Tailwind CSS with custom brand colors
+- **State Management**: React Query v5
+- **Code Quality**: Biome (linter + formatter)
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Icons**: Lucide React
+- **Visualizations**: @visx/hierarchy for member bubble chart
+- **Maps**: Mapbox GL (for tech map)
+
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ or 22+
+- Bun 1.0+ (alternative to npm/yarn)
+- npm, yarn, or pnpm
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/HackRegina/website.git
+cd website
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+bun install --legacy-peer-deps
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.local.example .env.local
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Edit `.env.local` and add your API tokens:
+- `MAPBOX_ACCESS_TOKEN` - For the tech map feature
+- `SLACK_BOT_TOKEN` - For fetching community members
+- `EVENTBRITE_PRIVATE_TOKEN` - For fetching events
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+4. Run the development server:
+```bash
+bun run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Available Scripts
+
+- `bun run dev` - Start development server
+- `bun run build` - Build for production
+- `bun run start` - Start production server
+- `bun run format` - Format code with Biome
+- `bun run lint` - Lint code with Biome
+
+## Project Structure
+
+```
+├── components/          # React components
+│   ├── ErrorBoundary.tsx
+│   ├── Footer/
+│   ├── Members/         # Community members bubble chart
+│   ├── Navbar/
+│   ├── SkeletonLoader.tsx
+│   └── ui/              # shadcn/ui components
+├── contexts/            # React contexts
+│   └── ThemeContext.tsx # Dark mode management
+├── data/                # Static data files
+│   └── organizations.json
+├── fetch/               # API fetch functions
+├── hooks/               # React Query hooks
+├── interfaces/          # TypeScript interfaces
+├── pages/               # Next.js pages
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   └── index.tsx        # Homepage
+├── public/              # Static assets
+│   ├── images/
+│   └── videos/
+├── styles/              # Global styles
+│   └── globals.css
+└── utils/               # Utility functions
+```
+
+## Features
+
+### Homepage
+- **Hero Section**: Video showcase with call-to-action
+- **Benefits**: Three-column grid highlighting events, connections, and community
+- **Partners**: Display of community partners with logos
+- **Sponsors**: Tiered sponsor display (Champion, Promotor, Supporter, Fan)
+- **Community Visualization**: Interactive bubble chart showing Slack members
+
+### Dark Mode
+- System preference detection
+- Manual toggle in navigation
+- Persistent user preference via localStorage
+- Default: Dark mode
+
+### Responsive Design
+- Mobile-first approach
+- Hamburger menu for mobile navigation
+- Adaptive layouts for all screen sizes
+
+## Brand Colors
+
+### Red Palette (Primary)
+- `brand-red-700`: #77232b (primary CTAs)
+- `brand-red-300`: #fca5a5 (accents in light mode)
+- Full scale: 50, 100, 300, 500, 700, 900
+
+### Blue Palette (Secondary)
+- `brand-blue-700`: #1a365d
+- Full scale: 50, 100, 300, 500, 700, 900
+
+## API Routes
+
+The following API routes need to be implemented:
+
+- `/api/events` - Fetch events from Eventbrite
+- `/api/members` - Fetch community members from Slack
+- `/api/website` - Fetch website metadata
 
 ## Contributing
 
-We highly encourage learning new technology and processes including contributing to open source software.  We understand that not everyone will have the skill set but we would love to teach you a new skill. Below we have provided instructions to contribute to this private repository.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Format your code (`bun run lint:fix`)
+4. Commit your changes (`git commit -m 'Add amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
 
-#### 1. Fork the repository
+## License
 
-Forking a repository is a simple two-step process. We've created a repository for you to practice with!
+This project is licensed under the ISC License.
 
-1. On GitHub, navigate to the [HackRegina/website](https://github.com/HackRegina/website) repository.
-2. In the top-right corner of the page, click Fork.
+## Community
 
-That's it! Now, you have a fork of the original HackRegina/website repository. [Read more on forking here](https://help.github.com/articles/fork-a-repo/).
+- **Slack**: [Join HackRegina on Slack](http://joinslack.hackregina.com/)
+- **GitHub**: [HackRegina](https://github.com/HackRegina)
+- **Twitter**: [@HackRegina](http://twitter.com/HackRegina)
+- **Facebook**: [HackRegina](https://www.facebook.com/HackRegina)
+- **LinkedIn**: [HackRegina](https://www.linkedin.com/company/hackregina/)
 
-#### 2. Make your changes
+## Acknowledgments
 
-#### 3. Create a Pull Request
+Special thanks to all our partners and sponsors who make HackRegina possible!
 
-You can open a pull request to the upstream repository from any branch or commit in your fork.
-
-1. Navigate to the original repository you created your fork from.
-2. To the right of the Branch menu, click New pull request.
-3. On the Compare page, click compare across forks.
-4. Confirm that the base fork is the repository you'd like to merge changes into. Use the base branch drop-down menu to select the branch of the upstream repository you'd like to merge changes into.
-5. Drop-down menus for choosing the head fork and compare branch. Use the head fork drop-down menu to select your fork, then use the compare branch drop-down menu to select the branch you made your changes in.
-6. Type a title and description for your pull request.
-7. If you do not want to allow anyone with push access to the upstream repository to make changes to your PR, unselect Allow edits from maintainers.
-8. Click Create pull request.
-
-[Read more on creating a pull request from a fork here](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
-
-#### 4. We will do the rest!
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!

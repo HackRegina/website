@@ -47,10 +47,7 @@
       "sponsor_tier": null,
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4452,
-          -104.6189
-        ]
+        "coordinates": [50.4452, -104.6189]
       },
       "technologies": [
         "Java",
@@ -76,10 +73,7 @@
       "address": "300A - 2221 Cornwall St.\nRegina, SK\nS4P 2L1",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.443612,
-          -104.611938
-        ]
+        "coordinates": [50.443612, -104.611938]
       },
       "technologies": [
         "Angular",
@@ -104,17 +98,9 @@
       "address": "1800 Hamilton St.\nRegina, SK\nS4P 4L3",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4500274,
-          -104.6119856
-        ]
+        "coordinates": [50.4500274, -104.6119856]
       },
-      "technologies": [
-        "Angular",
-        "Angular.js",
-        "Java",
-        "SAP"
-      ]
+      "technologies": ["Angular", "Angular.js", "Java", "SAP"]
     },
     {
       "name": "Offstreet",
@@ -130,17 +116,9 @@
       "address": " 2375 College Ave\nRegina, SK\nS4P 0S8",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.44044108705784,
-          -104.61253572692995
-        ]
+        "coordinates": [50.44044108705784, -104.61253572692995]
       },
-      "technologies": [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "AWS"
-      ]
+      "technologies": ["React", "TypeScript", "Node.js", "AWS"]
     },
     {
       "name": "iQmetrix",
@@ -153,10 +131,7 @@
       "address": "700 - 1801 Hamilton St.\nRegina, SK\nS4P 4B4",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.450098,
-          -104.609090
-        ]
+        "coordinates": [50.450098, -104.60909]
       },
       "technologies": [
         ".NET",
@@ -182,10 +157,7 @@
       "address": "700 - 1801 Hamilton St.\nRegina, SK\nS4P 4B4",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.450098,
-          -104.609090
-        ]
+        "coordinates": [50.450098, -104.60909]
       },
       "technologies": [
         ".NET",
@@ -209,10 +181,7 @@
       "address": "1412 N Benjamin Cr.\nRegina, SK\nS4X 4L3",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.501020,
-          -104.663479
-        ]
+        "coordinates": [50.50102, -104.663479]
       },
       "technologies": [
         "Unity 3D",
@@ -236,10 +205,7 @@
       "address": "1 South Plains Road West\nEmerald Park, SK\nS4L 1C6",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.445638,
-          -104.412405
-        ]
+        "coordinates": [50.445638, -104.412405]
       },
       "sponsorship": "gold",
       "technologies": [
@@ -268,19 +234,9 @@
       "address": "5922 Little Pine Loop\nRegina, SK\nS4X 0H5",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.5083655,
-          -104.6673616
-        ]
+        "coordinates": [50.5083655, -104.6673616]
       },
-      "technologies": [
-        "HTML/CSS",
-        "JavaScript",
-        "Laravel",
-        "OctoberCMS",
-        "PHP",
-        "WordPress"
-      ]
+      "technologies": ["HTML/CSS", "JavaScript", "Laravel", "OctoberCMS", "PHP", "WordPress"]
     },
     {
       "name": "Captive Media Inc.",
@@ -293,10 +249,7 @@
       "address": "200 – 1118 Broad St.\nRegina, SK\nS4R 1X8",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4510474,
-          -104.6233122
-        ]
+        "coordinates": [50.4510474, -104.6233122]
       },
       "technologies": [
         "HTML/CSS",
@@ -322,10 +275,7 @@
       "address": "105A - 2 Research Dr.\nRegina, SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.41533330000001,
-          -104.59035269999998
-        ]
+        "coordinates": [50.41533330000001, -104.59035269999998]
       },
       "sponsorship": "bronze",
       "technologies": [
@@ -351,10 +301,7 @@
       "address": "#260 - 10 Research Dr.\nRegina, SK\nS4S 7J7",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4134883,
-          -104.5895543
-        ]
+        "coordinates": [50.4134883, -104.5895543]
       },
       "sponsorship": "silver",
       "technologies": [
@@ -387,16 +334,9 @@
       "address": "2151 Albert St.\nRegina, SK\nS4P 2V1",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.444602,
-          -104.6178995
-        ]
+        "coordinates": [50.444602, -104.6178995]
       },
-      "technologies": [
-        "Laravel",
-        "Android",
-        "iOS"
-      ]
+      "technologies": ["Laravel", "Android", "iOS"]
     },
     {
       "name": "Krugo",
@@ -409,21 +349,9 @@
       "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415232,
-          -104.590410
-        ]
+        "coordinates": [50.415232, -104.59041]
       },
-      "technologies": [
-        "Swift",
-        "iOS",
-        "Kotlin",
-        "Android",
-        "AWS",
-        "Node.js",
-        "Go",
-        "Angular"
-      ]
+      "technologies": ["Swift", "iOS", "Kotlin", "Android", "AWS", "Node.js", "Go", "Angular"]
     },
     {
       "name": "AlttraSolutions",
@@ -436,10 +364,7 @@
       "address": "120-10 Reasearch Dr.\nRegina, SK\nS4S 7J7",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.413084,
-          -104.589516
-        ]
+        "coordinates": [50.413084, -104.589516]
       },
       "technologies": [
         "JavaScript",
@@ -471,21 +396,9 @@
       "address": "815 7th Ave #202\nRegina, SK\nS4N 0B3",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.458077,
-          -104.592657
-        ]
+        "coordinates": [50.458077, -104.592657]
       },
-      "technologies": [
-        "HTML/CSS",
-        "JavaScript",
-        ".NET",
-        "Unity 3D",
-        "C#",
-        "PHP",
-        "SQL",
-        "WebGL"
-      ]
+      "technologies": ["HTML/CSS", "JavaScript", ".NET", "Unity 3D", "C#", "PHP", "SQL", "WebGL"]
     },
     {
       "name": "Brew Ninja",
@@ -498,10 +411,7 @@
       "address": "2 Research Drive\nSuite 140\nRegina SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415232,
-          -104.590410
-        ]
+        "coordinates": [50.415232, -104.59041]
       },
       "technologies": [
         ".NET",
@@ -523,19 +433,9 @@
       "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415232,
-          -104.590410
-        ]
+        "coordinates": [50.415232, -104.59041]
       },
-      "technologies": [
-        "React Native",
-        "MySQL",
-        "Koa",
-        "Node.js",
-        "AWS",
-        "Docker"
-      ]
+      "technologies": ["React Native", "MySQL", "Koa", "Node.js", "AWS", "Docker"]
     },
     {
       "name": "DevFacto Technologies Inc.",
@@ -548,10 +448,7 @@
       "address": "#201, Victoria Park Building\n1945 Scarth St\nRegina, SK\nS4P 2H1",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4478917,
-          -104.6128621
-        ]
+        "coordinates": [50.4478917, -104.6128621]
       },
       "sponsorship": "silver",
       "technologies": [
@@ -579,10 +476,7 @@
       "address": "6200 E. Primrose Green Dr.\nRegina, SK\nS4V 3L7",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4294729,
-          -104.4952769
-        ]
+        "coordinates": [50.4294729, -104.4952769]
       },
       "technologies": [
         "PHP",
@@ -605,10 +499,7 @@
       "address": "1441 Fleury St \nRegina, SK \nS4N 7N5",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.4564301,
-          -104.5777211
-        ]
+        "coordinates": [50.4564301, -104.5777211]
       },
       "technologies": [
         "Archestra Intouch",
@@ -629,10 +520,7 @@
       "address": "2025 Victoria Ave\nRegina, SK\nS4P 0S1",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.446935,
-          -104.610114
-        ]
+        "coordinates": [50.446935, -104.610114]
       },
       "technologies": [
         "JavaScript",
@@ -669,10 +557,7 @@
       "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415232,
-          -104.590410
-        ]
+        "coordinates": [50.415232, -104.59041]
       },
       "technologies": [
         "Python",
@@ -701,10 +586,7 @@
       "address": "3930 Rae Street, Suite 3\nRegina, SK\nS4S 3A2",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.431866,
-          -104.621048
-        ]
+        "coordinates": [50.431866, -104.621048]
       },
       "technologies": [
         "React.js",
@@ -743,19 +625,9 @@
       "address": "2 Research Drive\nSuite 140\nRegina SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415183,
-          -104.589848
-        ]
+        "coordinates": [50.415183, -104.589848]
       },
-      "technologies": [
-        "React.js",
-        "React Native",
-        "PostgreSQL",
-        "AWS",
-        "Express",
-        "Docker"
-      ]
+      "technologies": ["React.js", "React Native", "PostgreSQL", "AWS", "Express", "Docker"]
     },
     {
       "name": "Toolshed",
@@ -768,19 +640,9 @@
       "address": "140 - 2 Research Dr.\nRegina, SK\nS4S 7H9",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.415232,
-          -104.590410
-        ]
+        "coordinates": [50.415232, -104.59041]
       },
-      "technologies": [
-        "Angular",
-        "TypeScript",
-        "Express",
-        "NestJS",
-        "Node.js",
-        "AWS"
-      ]
+      "technologies": ["Angular", "TypeScript", "Express", "NestJS", "Node.js", "AWS"]
     },
     {
       "name": "Open Path Partners",
@@ -794,10 +656,7 @@
       "sponsor_tier": "supporter",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          50.499400,
-          -104.611050
-        ]
+        "coordinates": [50.4994, -104.61105]
       },
       "technologies": [
         "Azure",
