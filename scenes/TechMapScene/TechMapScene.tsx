@@ -18,7 +18,7 @@ import {
   TechnologiesSelect,
 } from './components';
 
-const { NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN } = process.env;
+const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 
 type View = 'technologies' | 'companies';
 
@@ -82,12 +82,12 @@ export const TechMapScene = () => {
       c.technologies.some((t: string) => filteredTechnologies.includes(t)),
   );
 
-  if (!NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN) return null;
+  if (!MAPBOX_ACCESS_TOKEN) return null;
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8">
       <MapGL
-        mapboxAccessToken={NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+        mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
         initialViewState={DefaultState}
         style={{ width: '100%', height: '90vh', borderRadius: '1rem' }}
         maxBounds={[
@@ -129,12 +129,12 @@ export const TechMapScene = () => {
         )}
         {filteredCompanies.map(
           (company) =>
-            company.geometry?.coordinates[0] &&
-            company.geometry?.coordinates[1] && (
+            company.geometry?.coordinates?.[0] &&
+            company.geometry?.coordinates?.[1] && (
               <Marker
                 key={`marker.${createCompanySlug(company)}`}
-                latitude={company.geometry?.coordinates[0]}
-                longitude={company.geometry?.coordinates[1]}
+                latitude={company.geometry.coordinates[0]}
+                longitude={company.geometry.coordinates[1]}
               >
                 <CompanyMarker company={company} />
               </Marker>
