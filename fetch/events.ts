@@ -95,6 +95,10 @@ export const fetchEventByUrl = async ({ url }: { url?: string } = {}) => {
   };
 };
 
+export const fetchEventById = async (id: string) => {
+  return fetchEventByUrl({ url: `https://www.eventbriteapi.com/v3/events/${id}/` });
+};
+
 export const fetchEvents = async ({
   timeFilter,
 }: {
