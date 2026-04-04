@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "biome lint .",
     "lint:fix": "biome check --write .",
-    "share:linkedin": "bun --env-file=.env.local scripts/shareEvent.ts"
+    "share:linkedin": "bun --env-file=.env.local scripts/shareEvent.ts",
+    "create:events": "bun --env-file=.env.local scripts/createEvents/index.ts"
   },
   "repository": {
     "type": "git",
