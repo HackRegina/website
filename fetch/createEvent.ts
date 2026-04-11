@@ -98,6 +98,19 @@ export const setStructuredContent = async (
     agenda?: AgendaSlot[];
   },
 ): Promise<void> => {
+  // Fetch current version to avoid PAGE_VERSION_DISCONTINUITY on updates
+  let version = 1;
+  const res = await fetch(`${API_BASE}/events/${eventId}/structured_content/`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+  });
+  if (res.ok) {
+    const current = (await res.json()) as Record<string, unknown>;
+    if (typeof current.page_version_number === 'number') {
+      version = current.page_version_number;
+    } else if (typeof current.page_version_number === 'string') {
+      version = Number.parseInt(current.page_version_number, 10);
+    }
+  }
   const modules = [
     {
       type: 'text' as const,
@@ -112,13 +125,15 @@ export const setStructuredContent = async (
   }
 
   if (agenda?.length) {
-    widgets.push({
-      type: 'agenda',
-      data: { tabs: [{ name: 'Agenda', slots: agenda }] },
-    });
+    // Note: the Eventbrite API does not support the agenda widget via structured content.
+    // Agendas must be added manually through the Eventbrite UI.
+    // widgets.push({
+    //   type: 'agenda',
+    //   data: { tabs: [{ name: 'Agenda', slots: agenda }] },
+    // });
   }
 
-  await apiRequest(`/events/${eventId}/structured_content/1`, {
+  await apiRequest(`/events/${eventId}/structured_content/${version}/`, {
     modules,
     ...(widgets.length > 0 && { widgets }),
     publish: true,
