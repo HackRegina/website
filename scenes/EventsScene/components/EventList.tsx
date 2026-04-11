@@ -57,7 +57,7 @@ const UpcomingEventCard = ({ event }: { event: ILiveEvent }) => {
 };
 
 const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
-  const { name, image, venue } = event;
+  const { name, image } = event;
   const bgColor = getEventColor(name);
 
   return (
@@ -68,7 +68,6 @@ const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
         <p className="text-sm">
           {DateTime.fromMillis(event.start).toLocaleString(DateTime.DATETIME_FULL)}
         </p>
-        {venue?.place_name && <p className="text-sm">{venue.place_name}</p>}
       </CardContent>
     </Card>
   );
@@ -84,8 +83,13 @@ const getEventColor = (name: string): string => {
   return 'bg-gray-300 dark:bg-gray-700';
 };
 
-const EventImage = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
-    <Image src={src} alt={alt} fill className="object-cover" />
-  </div>
-);
+const EventImage = ({ src, alt }: { src: string; alt: string }) => {
+  if (!src) {
+    return null
+  }
+  return (
+    <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
+      <Image src={src} alt={alt} fill className="object-cover" />
+    </div>
+  )
+};
