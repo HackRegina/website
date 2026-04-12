@@ -57,12 +57,12 @@ const UpcomingEventCard = ({ event }: { event: ILiveEvent }) => {
 };
 
 const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
-  const { name, image } = event;
+  const { name } = event;
   const bgColor = getEventColor(name);
 
   return (
     <Card className={`${bgColor} border-0 shadow-lg`}>
-      <EventImage src={image} alt={name} />
+      <DraftEventImage name={name} />
       <CardContent className="p-6 space-y-3">
         <h3 className="text-xl font-semibold">{name}</h3>
         <p className="text-sm">
@@ -71,6 +71,14 @@ const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
       </CardContent>
     </Card>
   );
+};
+
+const DraftEventImage = ({ name }: { name: string }) => {
+  if (name.includes('Code Together')) return <EventImage src="/images/code-together-placeholder.png" alt={name} />;
+  if (name.includes('Lunch n\' Learn')) return <EventImage src="/images/lunch-n-learn-placeholder.png" alt={name} />;
+  if (name.includes('Battlesnake')) return <EventImage src="/images/battlesnake-placeholder.png" alt={name} />;
+  if (name.includes('Beer & Code Together')) return <EventImage src="/images/beer-n-code-placeholder.png" alt={name} />;
+  return null;
 };
 
 const getEventColor = (name: string): string => {
@@ -83,7 +91,7 @@ const getEventColor = (name: string): string => {
   return 'bg-gray-300 dark:bg-gray-700';
 };
 
-const EventImage = ({ src, alt }: { src: string; alt: string }) => {
+const EventImage = ({ src, alt }: { src?: string; alt: string }) => {
   if (!src) {
     return null
   }
