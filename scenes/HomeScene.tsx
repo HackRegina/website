@@ -7,14 +7,15 @@ import { BenefitsSection, CommunitySection, HeroSection, SponsorSections } from 
 
 export const HomeScene = () => {
   const { isDark } = useTheme();
-  const { data: organizations, isLoading: isLoadingOrgs } = useOrganizations();
+  const { partners, sponsors, isLoading: isLoadingOrgs } = useOrganizations();
   const { data: members, isLoading: isLoadingMembers } = useMembers();
   return (
     <>
       <HeroSection />
       <BenefitsSection />
       <SponsorSections
-        organizations={organizations}
+        partners={partners}
+        sponsors={sponsors}
         isLoadingOrgs={isLoadingOrgs}
         isDark={isDark}
       />

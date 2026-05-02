@@ -40,7 +40,7 @@ cp .env.local.example .env.local
 ```
 
 Edit `.env.local` and add your API tokens:
-- `MAPBOX_ACCESS_TOKEN` - For the tech map feature
+- `NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN` - For the tech map feature
 - `SLACK_BOT_TOKEN` - For fetching community members
 - `EVENTBRITE_PRIVATE_TOKEN` - For fetching events
 

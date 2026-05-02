@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  env: {
-    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
-  },
   images: {
     remotePatterns: [
       {
@@ -25,6 +22,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.evbuc.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
       },
     ],
   },

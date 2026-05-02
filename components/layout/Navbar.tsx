@@ -15,7 +15,7 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,7 +48,8 @@ export function Navbar() {
               </Link>
             ))}
 
-            <button
+            {/* TODO: Hide button until light mode is fixed.  */}
+            {/* <button
               type="button"
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -59,7 +60,7 @@ export function Navbar() {
               ) : (
                 <Moon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               )}
-            </button>
+            </button> */}
 
             <a
               href="http://joinslack.hackregina.com/"
@@ -74,7 +75,8 @@ export function Navbar() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center space-x-4">
-            <button
+            {/* TODO: Hide button until light mode is fixed.  */}
+            {/* <button
               type="button"
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -85,7 +87,7 @@ export function Navbar() {
               ) : (
                 <Moon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               )}
-            </button>
+            </button> */}
 
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
