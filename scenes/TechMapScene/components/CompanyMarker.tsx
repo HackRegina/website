@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import type { IOrganization } from '@/fetch/organizations';
 import { useWebsiteDetails } from '@/hooks/useWebsiteDetails';
+import { routes } from '@/lib/route';
 import { createCompanySlug } from '../TechMapScene';
 
 interface CompanyMarkerProps {
@@ -15,13 +16,7 @@ export function CompanyMarker({ company }: CompanyMarkerProps) {
   const isDefaultIcon = ref.current?.src.includes('/images/location-dot-solid.svg');
 
   return (
-    <Link
-      href={{
-        pathname: '/techmap',
-        query: { view: 'companies', company: createCompanySlug(company) },
-      }}
-      shallow={true}
-    >
+    <Link href={routes.techmap.companies({ company: createCompanySlug(company) })}>
       <Image
         ref={ref}
         src={data?.icon || '/images/location-dot-solid.svg'}

@@ -1,30 +1,28 @@
-import type { ParsedUrlQuery } from 'node:querystring';
 import { MoveLeft as ArrowBackIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReadonlyURLSearchParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { IOrganization } from '@/fetch/organizations';
 import { useWebsiteDetails } from '@/hooks/useWebsiteDetails';
+import { routes } from '@/lib/route';
 import { createTechnologySlug } from '../TechMapScene';
 
 interface CompanyViewProps {
-  query: ParsedUrlQuery;
+  searchParams: ReadonlyURLSearchParams;
   company: IOrganization;
 }
 
-export function CompanyView({ query, company }: CompanyViewProps) {
+export function CompanyView({ searchParams, company }: CompanyViewProps) {
   const { data } = useWebsiteDetails({ url: company.url });
 
   return (
     <div className="absolute top-0 bottom-0 left-0 h-full w-full md:w-1/3 bg-gray-100 dark:bg-secondary-900 rounded-2xl px-4 py-6">
       <h4 className="text-xl font-semibold mb-4">
-        <Link
-          href={{
-            pathname: '/techmap',
-            query: { ...query, company: undefined },
-          }}
-        >
+        <Link href={routes.techmap.companies({
+          technologies: searchParams.getAll('technologies'),
+        })}>
           <ArrowBackIcon className="inline mr-2 ml-2 h-5 w-5" />
         </Link>
         {company.name}

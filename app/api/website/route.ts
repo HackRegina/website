@@ -1,29 +1,17 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+export async function GET(req: Request) {
   try {
-    const { query } = req;
-    let url =
-      typeof query.url === 'string'
-        ? query.url
-        : Array.isArray(query.url)
-          ? query.url[0]
-          : undefined;
+    const requestUrl = new URL(req.url);
+    let url = requestUrl.searchParams.get('url') || undefined;
     if (!url) {
-      res.status(400).json({ message: 'Missing url query parameter' });
-      return;
+      return NextResponse.json({ message: 'Missing url query parameter' }, { status: 400 });
     }
 
     const response = await fetch(url);
     if (!response.ok || response.status !== 200) {
-      res.status(400).json({ message: 'Invalid url' });
-      return;
+      return NextResponse.json({ message: 'Invalid url' }, { status: 400 });
     }
-    // parse html to get title, description, icon without jsdom
     const html = await response.text();
     const title = html?.match(/<title[^>]*>([^<]+)<\/title>/)?.[1] || null;
     const description =
@@ -37,20 +25,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const iconRaw = html?.match(/<link[^>]*rel="icon"[^>]*href="([^"]*)"[^>]*>/)?.[1] || null;
     const isImageFullUrl = imageRaw?.startsWith('http') || false;
     const isIconFullUrl = iconRaw?.startsWith('http') || false;
-    // remove slash at the end of url
     url = url.endsWith('/') ? url.slice(0, -1) : url;
     const separator =
       url.endsWith('/') && (imageRaw?.startsWith('/') || iconRaw?.startsWith('/')) ? '' : '/';
     const image = isImageFullUrl || !imageRaw ? imageRaw : `${url}${separator}${imageRaw}`;
     const icon = isIconFullUrl || !iconRaw ? iconRaw : `${url}${separator}${iconRaw}`;
-    res.status(200).json({
-      title,
-      description,
-      image,
-      icon,
-    });
+    return NextResponse.json({ title, description, image, icon });
   } catch (error) {
     console.error('Error fetching website details:', error);
-    res.status(500).json({ error: 'Failed to fetch website details' });
+    return NextResponse.json(
+      { error: 'Failed to fetch website details' },
+      { status: 500 },
+    );
   }
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { IOrganization } from '@/fetch/organizations';
+import { routes } from '@/lib/route';
 import type { Technology } from '../TechMapScene';
 import { createTechnologySlug } from '../TechMapScene';
 
@@ -18,12 +19,7 @@ export function TechnologiesSelect({ companies, technologies }: TechnologiesSele
   return (
     <div className="absolute top-0 bottom-0 left-0 h-full w-full md:w-1/3 bg-gray-100 dark:bg-secondary-900 rounded-2xl px-4 py-6">
       <h4 className="text-xl font-semibold mb-4">
-        <Link
-          href={{
-            pathname: '/techmap',
-            query: {},
-          }}
-        >
+        <Link href={routes.techmap.list()}>
           <ArrowBackIcon className="inline mr-2 ml-2 h-5 w-5" />
         </Link>
         Technologies
@@ -47,13 +43,7 @@ export function TechnologiesSelect({ companies, technologies }: TechnologiesSele
                 )
               }
             >
-              <Link
-                href={{
-                  pathname: '/techmap',
-                  query: { view: 'companies', technologies: technology.name },
-                }}
-                shallow={true}
-              >
+              <Link href={routes.techmap.companies({ technologies: [technology.name] })}>
                 <span className="relative z-10">{technology.name}</span>
                 <Progress
                   value={technology.percentage}

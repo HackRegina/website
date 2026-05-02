@@ -1,7 +1,7 @@
 'use client';
 
 import { Search as SearchIcon, X as XIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import type { ViewState } from 'react-map-gl/mapbox';
 import MapGL, { Marker } from 'react-map-gl/mapbox';
@@ -39,22 +39,16 @@ export const createTechnologySlug = (technology: string) =>
 export const createCompanySlug = (company: IOrganization) => company.url.split('.').at(-2);
 
 export const TechMapScene = () => {
-  const { query } = useRouter();
+  const searchParams = useSearchParams();
   const { isDark } = useTheme();
   const { data: organizations } = useOrganizations();
   const [isShowingMenu, setIsShowingMenu] = useState(true);
 
-  const rawView = Array.isArray(query.view) ? query.view[0] : query.view;
+  const rawView = searchParams.get('view');
   const view: View | undefined =
     rawView === 'technologies' || rawView === 'companies' ? rawView : undefined;
-  const filteredTechnologies: string[] = Array.isArray(query.technologies)
-    ? query.technologies
-    : typeof query.technologies === 'string'
-      ? [query.technologies]
-      : [];
-  const selectedCompanySlug: string | undefined = Array.isArray(query.company)
-    ? query.company[0]
-    : query.company;
+  const filteredTechnologies: string[] = searchParams.getAll('technologies');
+  const selectedCompanySlug: string | undefined = searchParams.get('company') ?? undefined;
 
   const companies: IOrganization[] = organizations
     .filter((o) => !!o.geometry)
@@ -109,7 +103,7 @@ export const TechMapScene = () => {
           {isShowingMenu ? <XIcon className="h-4 w-4" /> : <SearchIcon className="h-4 w-4" />}
         </Button>
         {!!selectedCompany && isShowingMenu && (
-          <CompanyView query={query} company={selectedCompany} />
+          <CompanyView searchParams={searchParams} company={selectedCompany} />
         )}
         {!selectedCompany && isShowingMenu && (
           <>

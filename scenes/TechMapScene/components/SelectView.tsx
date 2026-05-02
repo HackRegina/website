@@ -1,6 +1,7 @@
 import { Search as SearchIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { routes } from '@/lib/route';
 
 export function SelectView() {
   return (
@@ -10,26 +11,10 @@ export function SelectView() {
         Tech map
       </h4>
       <Button asChild className="w-full mb-2 bg-primary-700 hover:bg-primary-900 text-white">
-        <Link
-          href={{
-            pathname: '/techmap',
-            query: { view: 'technologies' },
-          }}
-          shallow={true}
-        >
-          Search by technology
-        </Link>
+        <Link href={routes.techmap.technologies()}>Search by technology</Link>
       </Button>
       <Button asChild className="w-full mb-2 bg-primary-700 hover:bg-primary-900 text-white">
-        <Link
-          href={{
-            pathname: '/techmap',
-            query: { view: 'companies' },
-          }}
-          shallow={true}
-        >
-          Search by company
-        </Link>
+        <Link href={routes.techmap.companies()}>Search by company</Link>
       </Button>
     </div>
   );

@@ -1,14 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import { fetchEventByUrl } from '@/fetch/events';
 import { sendMessage } from '@/fetch/sendMessage';
 import { shareToLinkedIn } from '@/fetch/shareToLinkedIn';
 import { createEventMessage } from '@/utils/createEventMessage';
 
 const secret = process.env.EVENTBRITE_WEBHOOK_SECRET;
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+export async function POST(req: Request) {
   try {
-    const { query, body } = req;
-    if (query.secret !== secret) throw new Error('Invalid secret');
+    const url = new URL(req.url);
+    const querySecret = url.searchParams.get('secret');
+    if (querySecret !== secret) throw new Error('Invalid secret');
+
+    const body = await req.json();
     const channel = 'events';
     const { event } = await fetchEventByUrl({ url: body.api_url });
 
@@ -20,16 +24,13 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (slackResult.status === 'rejected') {
       console.error('Failed to send Slack message:', slackResult.reason);
     }
-
     if (linkedInResult.status === 'rejected') {
       console.error('Failed to create/share LinkedIn event:', linkedInResult.reason);
     }
 
-    res.status(200).json({ message: 'Webhook processed successfully' });
+    return NextResponse.json({ message: 'Webhook processed successfully' });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ message: 'Failed to send message' });
+    return NextResponse.json({ message: 'Failed to send message' }, { status: 500 });
   }
-};
-
-export default handler;
+}
