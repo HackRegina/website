@@ -1,9 +1,10 @@
 'use client';
 
-import { Menu, Moon, SlackIcon, Sun } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Slack } from '@/components/icons/BrandIcons';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -68,7 +69,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="bg-primary-700 hover:bg-primary-500 text-white rounded-full px-6 py-2 transition-colors"
             >
-              <SlackIcon className="h-5 w-5 inline-block mr-2 align-sub" />
+              <Slack className="h-5 w-5 inline-block mr-2 align-sub" />
               Join
             </a>
           </div>
@@ -120,7 +121,7 @@ export function Navbar() {
                     rel="noopener noreferrer"
                     className="bg-primary-700 hover:bg-primary-500 text-white rounded-full px-6 py-2 text-center transition-colors"
                   >
-                    <SlackIcon className="h-5 w-5 inline-block mr-2 align-sub" />
+                    <Slack className="h-5 w-5 inline-block mr-2 align-sub" />
                     Join
                   </a>
                 </div>
