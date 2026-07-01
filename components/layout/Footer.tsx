@@ -1,8 +1,8 @@
 'use client';
 
-import { Facebook, Github, Linkedin, Twitter } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Facebook, Github, Linkedin, Twitter } from '@/components/icons/BrandIcons';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const socialLinks = [
