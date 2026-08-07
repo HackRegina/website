@@ -44,7 +44,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.1",
+    "@biomejs/biome": "2.5.3",
     "@tailwindcss/postcss": "^4.3.2",
     "@types/luxon": "^3.7.2",
     "@types/mapbox-gl": "^3.5.0",
