@@ -1,14 +1,22 @@
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import type { Metadata } from 'next';
+import { fetchAdminEvents } from '@/fetch/adminEvents';
+import { adminEventsQueryKey } from '@/hooks/useAdminEvents';
 import { requireAdminOrRedirect } from '@/lib/adminAuth';
+import { AdminEventsScene } from '@/scenes/AdminEventsScene/AdminEventsScene';
 
 export const metadata: Metadata = { title: 'Admin - HackRegina' };
 
 export default async function AdminPage() {
-  const session = await requireAdminOrRedirect();
+  await requireAdminOrRedirect();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: adminEventsQueryKey,
+    queryFn: () => fetchAdminEvents(),
+  });
   return (
-    <p className="text-gray-700 dark:text-gray-300">
-      Signed in as {session.user.name ?? 'unknown user'}. Event management is coming in the next
-      update.
-    </p>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <AdminEventsScene />
+    </HydrationBoundary>
   );
 }
