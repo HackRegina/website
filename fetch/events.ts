@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
-
-const token = process.env.EVENTBRITE_TOKEN;
+import { eventbriteGet, ORG_ID } from '@/fetch/eventbrite';
 
 export interface IEventbriteEvent {
   id: string;
@@ -86,10 +85,8 @@ export interface IEventResponse {
 }
 
 export const fetchEventByUrl = async ({ url }: { url?: string } = {}) => {
-  if (!token) throw new Error('No token provided');
   if (!url) throw new Error('No url provided');
-  const response = await fetch(`${url}?token=${token}&expand=venue`);
-  const event: IEventBriteResponse['event'] = await response.json();
+  const event = await eventbriteGet<IEventBriteResponse['event']>(url, { expand: 'venue' });
   return {
     event,
   };
@@ -104,11 +101,10 @@ export const fetchEvents = async ({
 }: {
   timeFilter: 'current_future' | 'past';
 }): Promise<IEventResponse> => {
-  if (!token) throw new Error('No token provided');
-  const response = await fetch(
-    `https://www.eventbriteapi.com/v3/organizations/168322805152/events?token=${token}&time_filter=${timeFilter}&expand=sales_data_with_null`,
+  const { events = [] } = await eventbriteGet<{ events?: IEventbriteEvent[] }>(
+    `/organizations/${ORG_ID}/events/`,
+    { time_filter: timeFilter, expand: 'sales_data_with_null' },
   );
-  const { events = [] } = await response.json();
   const venueMap = new Map();
   await Promise.all(
     events
@@ -121,10 +117,7 @@ export const fetchEvents = async ({
       .map(async (venueId: string) => {
         try {
           if (!venueMap.has(venueId)) {
-            const venueResponse = await fetch(
-              `https://www.eventbriteapi.com/v3/venues/${venueId}?token=${token}`,
-            );
-            const venue = await venueResponse.json();
+            const venue = await eventbriteGet(`/venues/${venueId}/`);
             venueMap.set(venueId, venue);
           }
         } catch (error) {

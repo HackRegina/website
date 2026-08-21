@@ -1,7 +1,5 @@
 import type { DateTime } from 'luxon';
-
-const API_BASE = 'https://www.eventbriteapi.com/v3';
-const ORG_ID = '168322805152';
+import { API_BASE, ORG_ID } from '@/fetch/eventbrite';
 
 const token = process.env.EVENTBRITE_TOKEN;
 
