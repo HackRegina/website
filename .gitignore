@@ -37,3 +37,4 @@ next-env.d.ts
 
 # playwright
 .playwright-mcp
+certificates
