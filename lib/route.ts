@@ -1,6 +1,11 @@
 export const routes = {
   home: () => '/',
   events: () => '/events',
+  admin: {
+    dashboard: () => '/admin',
+    event: (id: string) => `/admin/events/${id}`,
+    login: () => '/admin/login',
+  },
   techmap: {
     list: () => '/techmap',
     technologies: () => '/techmap?view=technologies',
