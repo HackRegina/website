@@ -1,4 +1,4 @@
-type KeyType = 'members' | 'organizations' | 'website' | 'events';
+type KeyType = 'members' | 'organizations' | 'website' | 'events' | 'admin-events';
 
 export const generateQueryKey = ({
   key,
