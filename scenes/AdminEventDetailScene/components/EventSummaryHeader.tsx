@@ -10,6 +10,13 @@ interface EventSummaryHeaderProps {
   report: AttendeeReport;
 }
 
+// Red Swan order math: a large is 8 slices, budget 3 slices a person.
+const SLICES_PER_PERSON = 3;
+const SLICES_PER_LARGE_PIZZA = 8;
+
+const largePizzasNeeded = (people: number): number =>
+  Math.ceil((people * SLICES_PER_PERSON) / SLICES_PER_LARGE_PIZZA);
+
 interface StatTileProps {
   label: string;
   value: string;
@@ -54,7 +61,7 @@ export const EventSummaryHeader = ({ report }: EventSummaryHeaderProps) => {
           </p>
         </div>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <StatTile label="Registered" value={String(registered)} />
         <StatTile label="Checked in" value={String(summary.checkedIn)} />
         <StatTile
@@ -65,6 +72,11 @@ export const EventSummaryHeader = ({ report }: EventSummaryHeaderProps) => {
               ? `based on ${summary.eventsConsidered} past events · base rate ${Math.round(summary.baseRate * 100)}%`
               : 'no attendance history yet — showing default rates'
           }
+        />
+        <StatTile
+          label="Pizza order"
+          value={`${largePizzasNeeded(summary.expectedTurnout)} large`}
+          hint={`from Red Swan · ${SLICES_PER_PERSON} slices/person`}
         />
         {event.capacity !== null && event.capacity > 0 ? (
           <StatTile label="Capacity" value={`${event.sold ?? registered} / ${event.capacity}`}>
