@@ -10,28 +10,11 @@ interface EventSummaryHeaderProps {
   report: AttendeeReport;
 }
 
-// Red Swan order math: a large is 8 slices, budget 3 slices a person.
 const SLICES_PER_PERSON = 3;
 const SLICES_PER_LARGE_PIZZA = 8;
 
 const largePizzasNeeded = (people: number): number =>
   Math.ceil((people * SLICES_PER_PERSON) / SLICES_PER_LARGE_PIZZA);
-
-interface StatTileProps {
-  label: string;
-  value: string;
-  hint?: string;
-  children?: React.ReactNode;
-}
-
-const StatTile = ({ label, value, hint, children }: StatTileProps) => (
-  <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-    <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{value}</p>
-    {hint && <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{hint}</p>}
-    {children}
-  </div>
-);
 
 export const EventSummaryHeader = ({ report }: EventSummaryHeaderProps) => {
   const { event, summary } = report;
@@ -92,3 +75,19 @@ export const EventSummaryHeader = ({ report }: EventSummaryHeaderProps) => {
     </div>
   );
 };
+
+interface StatTileProps {
+  label: string;
+  value: string;
+  hint?: string;
+  children?: React.ReactNode;
+}
+
+const StatTile = ({ label, value, hint, children }: StatTileProps) => (
+  <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+    <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
+    <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{value}</p>
+    {hint && <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{hint}</p>}
+    {children}
+  </div>
+);

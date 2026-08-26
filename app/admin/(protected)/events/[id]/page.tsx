@@ -22,7 +22,6 @@ export default async function AdminEventPage({ params }: AdminEventPageProps) {
     queryClient.setQueryData(attendeeReportQueryKey(id), report);
   } catch (error) {
     if (isEventbriteNotFound(error)) notFound();
-    // Non-404 failures fall through so the client hook can retry and show its error state.
     console.error('Failed to prefetch attendee report:', error);
   }
   return (

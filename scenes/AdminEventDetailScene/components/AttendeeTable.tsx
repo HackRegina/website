@@ -18,18 +18,6 @@ interface AttendeeTableProps {
   report: AttendeeReport;
 }
 
-const StatusBadge = ({ attendee }: { attendee: IAttendeeWithPrediction }) => {
-  if (attendee.refunded) {
-    return (
-      <Badge className="bg-rose-200 text-rose-900 dark:bg-rose-900 dark:text-rose-200">
-        Refunded
-      </Badge>
-    );
-  }
-  if (attendee.cancelled) return <Badge>Cancelled</Badge>;
-  return <Badge variant="primary">{attendee.status}</Badge>;
-};
-
 export const AttendeeTable = ({ report }: AttendeeTableProps) => {
   const [filter, setFilter] = useState('');
   const needle = filter.trim().toLowerCase();
@@ -114,4 +102,16 @@ export const AttendeeTable = ({ report }: AttendeeTableProps) => {
       </Table>
     </div>
   );
+};
+
+const StatusBadge = ({ attendee }: { attendee: IAttendeeWithPrediction }) => {
+  if (attendee.refunded) {
+    return (
+      <Badge className="bg-rose-200 text-rose-900 dark:bg-rose-900 dark:text-rose-200">
+        Refunded
+      </Badge>
+    );
+  }
+  if (attendee.cancelled) return <Badge>Cancelled</Badge>;
+  return <Badge variant="primary">{attendee.status}</Badge>;
 };
