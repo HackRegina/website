@@ -1,4 +1,5 @@
 import { eventbriteGet } from '@/fetch/eventbrite';
+import { cleanProfileName } from '@/utils/profileName';
 
 interface EventbriteAttendee {
   id: string;
@@ -52,7 +53,7 @@ export const fetchAttendeesForEvent = async (eventId: string): Promise<IAttendee
     for (const attendee of data.attendees ?? []) {
       attendees.push({
         id: attendee.id,
-        name: attendee.profile?.name ?? null,
+        name: cleanProfileName(attendee.profile?.name),
         email: attendee.profile?.email ?? null,
         ticketClassName: attendee.ticket_class_name ?? null,
         status: attendee.status,
