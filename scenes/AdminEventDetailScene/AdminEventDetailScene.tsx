@@ -2,7 +2,8 @@
 
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { useAttendeeReport } from '@/hooks/useAttendeeReport';
+import { useEventAttendees } from '@/hooks/useEventAttendees';
+import { useEventStats } from '@/hooks/useEventStats';
 import { routes } from '@/lib/route';
 import { AttendeeTable, EventSummaryHeader } from './components';
 
@@ -11,7 +12,8 @@ interface AdminEventDetailSceneProps {
 }
 
 export const AdminEventDetailScene = ({ eventId }: AdminEventDetailSceneProps) => {
-  const { report, isLoading, isError } = useAttendeeReport(eventId);
+  const { data, isLoading, isError } = useEventAttendees(eventId);
+  const { stats, isError: isStatsError } = useEventStats(eventId);
 
   return (
     <section>
@@ -25,16 +27,21 @@ export const AdminEventDetailScene = ({ eventId }: AdminEventDetailSceneProps) =
       {isError && (
         <p className="text-red-700 dark:text-red-300">Failed to load attendees. Try refreshing.</p>
       )}
+      {isStatsError && (
+        <p className="mb-4 text-red-700 dark:text-red-300">
+          Failed to load event stats. Try refreshing.
+        </p>
+      )}
       {isLoading && (
         <div className="space-y-6">
           <div className="h-32 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800" />
           <div className="h-96 animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800" />
         </div>
       )}
-      {report && (
+      {data && (
         <div className="space-y-8">
-          <EventSummaryHeader report={report} />
-          <AttendeeTable report={report} />
+          <EventSummaryHeader event={data.event} stats={stats} />
+          <AttendeeTable attendees={data.attendees} predictions={stats?.predictions ?? null} />
         </div>
       )}
     </section>

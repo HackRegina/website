@@ -2,9 +2,9 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { isEventbriteNotFound } from '@/fetch/attendees';
-import { attendeeReportQueryKey } from '@/hooks/useAttendeeReport';
+import { eventAttendeesQueryKey } from '@/hooks/useEventAttendees';
 import { requireAdminOrRedirect } from '@/lib/adminAuth';
-import { getAttendeeReport } from '@/lib/attendeeReport';
+import { getEventAttendees } from '@/lib/eventAttendees';
 import { AdminEventDetailScene } from '@/scenes/AdminEventDetailScene/AdminEventDetailScene';
 
 export const metadata: Metadata = { title: 'Event Attendees - HackRegina' };
@@ -18,11 +18,10 @@ export default async function AdminEventPage({ params }: AdminEventPageProps) {
   const { id } = await params;
   const queryClient = new QueryClient();
   try {
-    const report = await getAttendeeReport(id);
-    queryClient.setQueryData(attendeeReportQueryKey(id), report);
+    queryClient.setQueryData(eventAttendeesQueryKey(id), await getEventAttendees(id));
   } catch (error) {
     if (isEventbriteNotFound(error)) notFound();
-    console.error('Failed to prefetch attendee report:', error);
+    console.error('Failed to prefetch event attendees:', error);
   }
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

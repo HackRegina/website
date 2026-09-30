@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge';
 
 interface ProbabilityBadgeProps {
-  probability: number | null;
+  probability: number;
   isNew: boolean;
 }
 
@@ -18,9 +18,6 @@ const tierClasses = (percent: number): string => {
 };
 
 export const ProbabilityBadge = ({ probability, isNew }: ProbabilityBadgeProps) => {
-  if (probability === null) {
-    return <span className="text-gray-400 dark:text-gray-500">—</span>;
-  }
   const percent = Math.round(probability * 100);
   return (
     <span className="inline-flex items-center gap-1.5">

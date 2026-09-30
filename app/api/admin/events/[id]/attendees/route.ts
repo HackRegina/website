@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isEventbriteNotFound } from '@/fetch/attendees';
 import { requireAdmin } from '@/lib/adminAuth';
-import { getAttendeeReport } from '@/lib/attendeeReport';
+import { getEventAttendees } from '@/lib/eventAttendees';
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin();
@@ -10,13 +10,12 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   }
   try {
     const { id } = await params;
-    const report = await getAttendeeReport(id);
-    return NextResponse.json(report);
+    return NextResponse.json(await getEventAttendees(id));
   } catch (error) {
     if (isEventbriteNotFound(error)) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
     }
-    console.error('Error building attendee report:', error);
+    console.error('Error fetching event attendees:', error);
     return NextResponse.json({ error: 'Failed to fetch attendees' }, { status: 500 });
   }
 }
