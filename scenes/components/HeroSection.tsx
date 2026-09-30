@@ -5,8 +5,8 @@ import { useState } from 'react';
 export const HeroSection = () => {
   const [videoStatus, setVideoStatus] = useState<'idle' | 'playing' | 'paused'>('idle');
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-      <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
+    <section className="overflow-hidden py-20 md:py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-10">
         {/* Left Content */}
         <div className="flex-1 space-y-5 md:space-y-10">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold leading-tight">
