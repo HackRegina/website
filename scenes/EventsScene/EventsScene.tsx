@@ -9,7 +9,7 @@ export const EventsScene = () => {
 
   return (
     <>
-      {featuredEvent?.status === 'live' && <FeaturedEvent event={featuredEvent} />}
+      {featuredEvent && <FeaturedEvent event={featuredEvent} />}
       <EventList events={remainingEvents} />
     </>
   );

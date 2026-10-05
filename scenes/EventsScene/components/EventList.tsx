@@ -5,6 +5,7 @@ import Image from 'next/image';
 import type React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import type { IDraftEvent, IEvent, ILiveEvent } from '@/fetch/events';
+import { eventPlaceholderImage } from '@/utils/eventPlaceholderImage';
 
 interface EventListProps {
   events: IEvent[];
@@ -62,7 +63,7 @@ const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
 
   return (
     <Card className={`${bgColor} border-0 shadow-lg`}>
-      <DraftEventImage name={name} />
+      <EventImage src={eventPlaceholderImage(name)} alt={name} />
       <CardContent className="p-6 space-y-3">
         <h3 className="text-xl font-semibold">{name}</h3>
         <p className="text-sm">
@@ -71,14 +72,6 @@ const DraftEventCard = ({ event }: { event: IDraftEvent }) => {
       </CardContent>
     </Card>
   );
-};
-
-const DraftEventImage = ({ name }: { name: string }) => {
-  if (name.includes('Code Together')) return <EventImage src="/images/code-together-placeholder.png" alt={name} />;
-  if (name.includes('Lunch n\' Learn')) return <EventImage src="/images/lunch-n-learn-placeholder.png" alt={name} />;
-  if (name.includes('Battlesnake')) return <EventImage src="/images/battlesnake-placeholder.png" alt={name} />;
-  if (name.includes('Beer & Code Together')) return <EventImage src="/images/beer-n-code-placeholder.png" alt={name} />;
-  return null;
 };
 
 const getEventColor = (name: string): string => {

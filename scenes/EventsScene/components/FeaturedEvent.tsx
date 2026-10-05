@@ -3,14 +3,17 @@
 import { DateTime } from 'luxon';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import type { ILiveEvent } from '@/fetch/events';
+import type { IEvent, ILiveEvent } from '@/fetch/events';
+import { eventPlaceholderImage } from '@/utils/eventPlaceholderImage';
 
 interface FeaturedEventProps {
-  event: ILiveEvent;
+  event: IEvent;
 }
 
 export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
-  const { name, image, url, summary, venue } = event;
+  const { name, venue } = event;
+  const isLive = event.status === 'live';
+  const image = isLive ? event.image : eventPlaceholderImage(name);
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 md:pt-40" id="feature-event">
@@ -19,11 +22,13 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
         <div className="flex-1 space-y-5 md:space-y-10">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold leading-tight">
             <span className="relative inline-block">
-              <span className="relative z-10">Join us at our next</span>
+              <span className="relative z-10">
+                {isLive ? 'Join us at our next' : 'Save the date for our next'}
+              </span>
               <span className="absolute bottom-1 left-0 w-full h-[30%] bg-primary-300 dark:bg-primary-700 -z-10" />
             </span>
             <br />
-            <span className="text-primary-700 dark:text-primary-300">{event.name}</span>
+            <span className="text-primary-700 dark:text-primary-300">{name}</span>
           </h1>
 
           <div className="mb-4 text-gray-500 dark:text-gray-400">
@@ -34,15 +39,7 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
             {venue?.localized_address_display && <p>{venue.localized_address_display}</p>}
           </div>
 
-          <div className="mb-4">{summary}</div>
-
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <Button asChild size="lg" className="rounded-full px-6">
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                Register
-              </a>
-            </Button>
-          </div>
+          {isLive ? <RegistrationDetails event={event} /> : <RegistrationOpensSoon />}
         </div>
 
         {/* Right Image with Blob */}
@@ -74,3 +71,23 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
     </section>
   );
 };
+
+const RegistrationDetails = ({ event }: { event: ILiveEvent }) => (
+  <>
+    <div className="mb-4">{event.summary}</div>
+
+    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+      <Button asChild size="lg" className="rounded-full px-6">
+        <a href={event.url} target="_blank" rel="noopener noreferrer">
+          Register
+        </a>
+      </Button>
+    </div>
+  </>
+);
+
+const RegistrationOpensSoon = () => (
+  <p className="inline-block rounded-full border border-primary-700 dark:border-primary-300 px-6 py-3 text-lg text-primary-700 dark:text-primary-300">
+    Registration opens soon
+  </p>
+);
