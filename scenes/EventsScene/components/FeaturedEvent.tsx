@@ -16,14 +16,14 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
   const image = isLive ? event.image : eventPlaceholderImage(name);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 md:pt-40" id="feature-event">
-      <div className="flex flex-col md:flex-row items-center gap-8 md:gap-10 py-20 md:py-28">
+    <section className="overflow-hidden py-20 md:py-28" id="feature-event">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-10">
         {/* Left Content */}
         <div className="flex-1 space-y-5 md:space-y-10">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold leading-tight">
             <span className="relative inline-block">
               <span className="relative z-10">
-                {isLive ? 'Join us at our next' : 'Save the date for our next'}
+                {isLive ? 'Join us at our next' : 'Save the date for'}
               </span>
               <span className="absolute bottom-1 left-0 w-full h-[30%] bg-primary-300 dark:bg-primary-700 -z-10" />
             </span>
@@ -31,7 +31,7 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
             <span className="text-primary-700 dark:text-primary-300">{name}</span>
           </h1>
 
-          <div className="mb-4 text-gray-500 dark:text-gray-400">
+          <div className="text-gray-500 dark:text-gray-400">
             <p className="text-xl font-bold">
               {DateTime.fromMillis(event.start).toLocaleString(DateTime.DATETIME_FULL)}
             </p>
@@ -42,7 +42,7 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
           {isLive ? <RegistrationDetails event={event} /> : <RegistrationOpensSoon />}
         </div>
 
-        {/* Right Image with Blob */}
+        {/* Right Image */}
         <div className="flex-1 flex justify-center items-center relative w-full">
           {/* Blob Background */}
           <svg
@@ -62,7 +62,7 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
 
           {/* Event Image */}
           {image && (
-            <div className="relative w-full max-w-sm h-48 rounded-md overflow-hidden">
+            <div className="relative h-[300px] w-full rounded-2xl shadow-2xl overflow-hidden">
               <Image src={image} alt={name} fill className="object-cover" />
             </div>
           )}
@@ -74,9 +74,9 @@ export const FeaturedEvent = ({ event }: FeaturedEventProps) => {
 
 const RegistrationDetails = ({ event }: { event: ILiveEvent }) => (
   <>
-    <div className="mb-4">{event.summary}</div>
+    <p className="text-lg">{event.summary}</p>
 
-    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+    <div>
       <Button asChild size="lg" className="rounded-full px-6">
         <a href={event.url} target="_blank" rel="noopener noreferrer">
           Register
