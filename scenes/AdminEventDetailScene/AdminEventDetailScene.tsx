@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEventAttendees } from '@/hooks/useEventAttendees';
 import { useEventStats } from '@/hooks/useEventStats';
 import { routes } from '@/lib/route';
-import { AttendeeTable, EventSummaryHeader } from './components';
+import { AttendeeTable, DietaryRestrictions, EventSummaryHeader } from './components';
 
 interface AdminEventDetailSceneProps {
   eventId: string;
@@ -41,6 +41,7 @@ export const AdminEventDetailScene = ({ eventId }: AdminEventDetailSceneProps) =
       {data && (
         <div className="space-y-8">
           <EventSummaryHeader event={data.event} stats={stats} />
+          <DietaryRestrictions attendees={data.attendees} />
           <AttendeeTable attendees={data.attendees} predictions={stats?.predictions ?? null} />
         </div>
       )}

@@ -1,4 +1,5 @@
 import { eventbriteGet } from '@/fetch/eventbrite';
+import { dietaryRestrictionsFromAnswers, type EventbriteAnswer } from '@/utils/dietaryRestrictions';
 import { cleanProfileName } from '@/utils/profileName';
 
 interface EventbriteAttendee {
@@ -11,6 +12,7 @@ interface EventbriteAttendee {
   refunded?: boolean;
   profile?: { name?: string | null; email?: string | null };
   event_id?: string;
+  answers?: EventbriteAnswer[];
 }
 
 interface EventbriteAttendeesPage {
@@ -23,6 +25,7 @@ export interface IAttendee {
   name: string | null;
   email: string | null;
   ticketClassName: string | null;
+  dietaryRestrictions: string | null;
   status: string;
   checkedIn: boolean;
   cancelled: boolean;
@@ -56,6 +59,7 @@ export const fetchAttendeesForEvent = async (eventId: string): Promise<IAttendee
         name: cleanProfileName(attendee.profile?.name),
         email: attendee.profile?.email ?? null,
         ticketClassName: attendee.ticket_class_name ?? null,
+        dietaryRestrictions: dietaryRestrictionsFromAnswers(attendee.answers),
         status: attendee.status,
         checkedIn: !!attendee.checked_in,
         cancelled: !!attendee.cancelled,

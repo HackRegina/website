@@ -4,6 +4,7 @@ export const attendee = (overrides: Partial<IAttendee> & Pick<IAttendee, 'id'>):
   name: null,
   email: null,
   ticketClassName: null,
+  dietaryRestrictions: null,
   status: 'Attending',
   checkedIn: false,
   cancelled: false,

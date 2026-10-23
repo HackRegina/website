@@ -59,6 +59,7 @@ export const AttendeeTable = ({ attendees, predictions }: AttendeeTableProps) =>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Ticket</TableHead>
+            <TableHead>Dietary</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Checked in</TableHead>
             <TableHead>Show-up chance</TableHead>
@@ -79,6 +80,9 @@ export const AttendeeTable = ({ attendees, predictions }: AttendeeTableProps) =>
               <TableCell className="text-gray-700 dark:text-gray-300">
                 {attendee.ticketClassName ?? '—'}
               </TableCell>
+              <TableCell className="max-w-48 text-gray-700 dark:text-gray-300">
+                {attendee.dietaryRestrictions ?? '—'}
+              </TableCell>
               <TableCell>
                 <StatusBadge attendee={attendee} />
               </TableCell>
@@ -96,7 +100,7 @@ export const AttendeeTable = ({ attendees, predictions }: AttendeeTableProps) =>
           ))}
           {rows.length === 0 && (
             <TableRow>
-              <TableCell colSpan={6} className="py-8 text-center text-gray-500 dark:text-gray-400">
+              <TableCell colSpan={7} className="py-8 text-center text-gray-500 dark:text-gray-400">
                 {attendees.length === 0 ? 'No attendees yet.' : 'No attendees match the filter.'}
               </TableCell>
             </TableRow>
