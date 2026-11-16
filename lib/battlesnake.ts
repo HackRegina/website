@@ -57,28 +57,21 @@ export const cleanUsername = (input: string) =>
     .replace(/\/.*$/, '');
 
 type Fetcher = (url: string) => Promise<Response>;
+const defaultFetcher: Fetcher = (url) => fetch(url, { cache: 'no-store' });
 
-/**
- * Checks that a Battlesnake account exists on arena.battlesnake.com and that the
- * snake is one of its public snakes.
- */
-export const verifyBattlesnake = async (
+export type ProfileLookup =
+  | { ok: true; username: string; snakes: ArenaSnake[] }
+  | { ok: false; field: 'username'; error: string };
+
+/** Looks up a player on arena.battlesnake.com and lists their public snakes. */
+export const fetchProfileSnakes = async (
   usernameInput: string,
-  snakeInput: string,
-  fetcher: Fetcher = (url) => fetch(url, { cache: 'no-store' }),
-): Promise<BattlesnakeCheck> => {
+  fetcher: Fetcher = defaultFetcher,
+): Promise<ProfileLookup> => {
   const username = cleanUsername(usernameInput);
   if (!USERNAME_PATTERN.test(username)) {
     return { ok: false, field: 'username', error: 'Enter your Battlesnake username.' };
   }
-  if (!snakeInput.trim()) {
-    return {
-      ok: false,
-      field: 'snake',
-      error: 'Enter the name of the snake you will compete with.',
-    };
-  }
-
   const res = await fetcher(`${ARENA_BASE}/users/${encodeURIComponent(username)}`);
   if (res.status === 404) {
     return {
@@ -88,16 +81,33 @@ export const verifyBattlesnake = async (
     };
   }
   if (!res.ok) throw new Error(`Battlesnake profile lookup failed with ${res.status}`);
+  return { ok: true, username, snakes: parseProfileSnakes(await res.text()) };
+};
 
-  const snakes = parseProfileSnakes(await res.text());
+/**
+ * Checks that a Battlesnake account exists on arena.battlesnake.com and that the
+ * snake is one of its public snakes. The snake doesn't need to be running.
+ */
+export const verifyBattlesnake = async (
+  usernameInput: string,
+  snakeInput: string,
+  fetcher: Fetcher = defaultFetcher,
+): Promise<BattlesnakeCheck> => {
+  if (!snakeInput.trim()) {
+    return { ok: false, field: 'snake', error: 'Pick the snake you will compete with.' };
+  }
+  const profile = await fetchProfileSnakes(usernameInput, fetcher);
+  if (!profile.ok) return profile;
+  const { username, snakes } = profile;
+
   const snake = findSnake(snakes, snakeInput);
   if (!snake) {
     return {
       ok: false,
       field: 'snake',
       error: snakes.length
-        ? `"${snakeInput.trim()}" isn't one of ${username}'s public snakes. Their snakes are: ${snakes.map((s) => s.name).join(', ')}.`
-        : `${username} has no public snakes yet. Create one at arena.battlesnake.com, then try again.`,
+        ? `"${snakeInput.trim()}" isn't one of ${username}'s public snakes.`
+        : `${username} has no public snakes yet. Create one at arena.battlesnake.com (it doesn't need to work yet), then try again.`,
     };
   }
 
