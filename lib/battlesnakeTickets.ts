@@ -1,3 +1,4 @@
+import { fetchAttendeesForEvent, type IAttendee } from '@/fetch/attendees';
 import { eventbriteGet, eventbritePost, ORG_ID } from '@/fetch/eventbrite';
 import type { VerifiedBattlesnake } from '@/lib/battlesnake';
 
@@ -142,3 +143,32 @@ export const reserveTicket = async (
 
   return { ok: true, code, checkoutUrl: checkoutUrl(code) };
 };
+
+const COMPETITOR_TICKETS = new Map<string, string>(
+  Object.values(BRACKETS).map((b) => [b.ticketClassName, b.label]),
+);
+
+/**
+ * Finds an active competitor ticket already held under this email, whether it was
+ * bought on Eventbrite before this page existed or through this page.
+ */
+export const matchCompetitor = (
+  attendees: Pick<IAttendee, 'email' | 'ticketClassName' | 'cancelled' | 'refunded'>[],
+  email: string,
+): { bracketLabel: string } | undefined => {
+  const wanted = email.trim().toLowerCase();
+  const match = attendees.find(
+    (a) =>
+      !a.cancelled &&
+      !a.refunded &&
+      a.email?.trim().toLowerCase() === wanted &&
+      a.ticketClassName !== null &&
+      COMPETITOR_TICKETS.has(a.ticketClassName),
+  );
+  return match?.ticketClassName
+    ? { bracketLabel: COMPETITOR_TICKETS.get(match.ticketClassName) ?? match.ticketClassName }
+    : undefined;
+};
+
+export const findExistingCompetitor = async (email: string) =>
+  matchCompetitor(await fetchAttendeesForEvent(TOURNAMENT.eventId), email);

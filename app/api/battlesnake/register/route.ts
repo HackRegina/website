@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 import { verifyBattlesnake } from '@/lib/battlesnake';
-import { fetchBrackets, isBracket, reserveTicket, TOURNAMENT } from '@/lib/battlesnakeTickets';
+import {
+  fetchBrackets,
+  findExistingCompetitor,
+  isBracket,
+  reserveTicket,
+  TOURNAMENT,
+} from '@/lib/battlesnakeTickets';
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const fail = (field: string, error: string, status = 400) =>
   NextResponse.json({ ok: false, field, error }, { status });
@@ -27,10 +35,21 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as Record<string, unknown>;
   const text = (key: string) => (typeof body[key] === 'string' ? (body[key] as string).trim() : '');
   if (!isBracket(body.bracket)) return fail('bracket', 'Pick a bracket.');
+  const email = text('email');
+  if (!EMAIL_PATTERN.test(email)) return fail('email', 'Enter the email you use for Eventbrite.');
 
   try {
     const check = await verifyBattlesnake(text('username'), text('snake'));
     if (!check.ok) return fail(check.field, check.error);
+
+    const existing = await findExistingCompetitor(email);
+    if (existing) {
+      return fail(
+        'email',
+        `You're already registered in the ${existing.bracketLabel} bracket with this email, so there's no need to register again. Need to change brackets? Reply to your Eventbrite confirmation or ask in #battlesnake on Slack.`,
+        409,
+      );
+    }
 
     const bracket = (await fetchBrackets()).find((b) => b.id === body.bracket);
     if (!bracket) return fail('bracket', 'That bracket is not open for registration.');

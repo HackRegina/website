@@ -22,7 +22,7 @@ interface ArenaSnake {
   name: string;
 }
 
-type Field = 'bracket' | 'username' | 'snake' | 'form';
+type Field = 'bracket' | 'email' | 'username' | 'snake' | 'form';
 
 const BRACKET_HINTS: Record<string, string> = {
   student: 'Currently enrolled in high school or post-secondary.',
@@ -47,6 +47,7 @@ export const BattlesnakeRegistrationScene = () => {
   });
 
   const [bracket, setBracket] = useState('');
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [snakes, setSnakes] = useState<ArenaSnake[] | null>(null);
   const [snakeId, setSnakeId] = useState('');
@@ -97,7 +98,7 @@ export const BattlesnakeRegistrationScene = () => {
       const res = await fetch('/api/battlesnake/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bracket, username, snake: snakeId }),
+        body: JSON.stringify({ bracket, email, username, snake: snakeId }),
       });
       const result = await res.json();
       if (result.ok) {
@@ -207,6 +208,27 @@ export const BattlesnakeRegistrationScene = () => {
           <fieldset className="space-y-3">
             <legend className="font-semibold">2. Pick your snake</legend>
             <div>
+              <label htmlFor="email" className="mb-1 block text-sm font-medium">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                className={inputClass}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrors({});
+                }}
+              />
+              <p className="mt-1 text-sm text-gray-500">
+                Use the same email for Eventbrite. If you've already registered, we'll let you know
+                instead of booking a second spot.
+              </p>
+              <FieldError message={errors.email} />
+            </div>
+            <div>
               <label htmlFor="username" className="mb-1 block text-sm font-medium">
                 Battlesnake username
               </label>
@@ -272,7 +294,11 @@ export const BattlesnakeRegistrationScene = () => {
           </fieldset>
 
           <FieldError message={errors.form} />
-          <Button type="submit" size="lg" disabled={submitting || !bracket || !snakeId}>
+          <Button
+            type="submit"
+            size="lg"
+            disabled={submitting || !bracket || !email.trim() || !snakeId}
+          >
             {submitting ? 'Reserving your spot…' : 'Continue to your details'}
           </Button>
         </form>
