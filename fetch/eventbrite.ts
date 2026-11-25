@@ -31,21 +31,3 @@ export const eventbriteGet = async <T>(
   }
   return res.json() as Promise<T>;
 };
-
-export const eventbritePost = async <T>(path: string, body: unknown): Promise<T> => {
-  if (!token) throw new Error('EVENTBRITE_TOKEN is required');
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Eventbrite API error ${res.status}: ${text}`);
-  }
-  return res.json() as Promise<T>;
-};

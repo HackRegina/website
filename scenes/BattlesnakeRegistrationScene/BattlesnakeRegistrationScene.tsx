@@ -1,9 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { type FormEvent, useCallback, useState } from 'react';
+import { type FormEvent, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { EventbriteCheckout } from './EventbriteCheckout';
 
 interface BracketInfo {
   id: string;
@@ -22,7 +21,15 @@ interface ArenaSnake {
   name: string;
 }
 
-type Field = 'bracket' | 'email' | 'username' | 'snake' | 'form';
+type Field =
+  | 'bracket'
+  | 'firstName'
+  | 'lastName'
+  | 'email'
+  | 'dietaryRestrictions'
+  | 'username'
+  | 'snake'
+  | 'form';
 
 const BRACKET_HINTS: Record<string, string> = {
   student: 'Currently enrolled in high school or post-secondary.',
@@ -36,6 +43,42 @@ const inputClass =
 const FieldError = ({ message }: { message?: string }) =>
   message ? <p className="mt-1 text-sm text-red-600 dark:text-red-400">{message}</p> : null;
 
+const TextField = ({
+  id,
+  label,
+  value,
+  onChange,
+  error,
+  hint,
+  type = 'text',
+  autoComplete,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
+  hint?: string;
+  type?: string;
+  autoComplete?: string;
+}) => (
+  <div>
+    <label htmlFor={id} className="mb-1 block text-sm font-medium">
+      {label}
+    </label>
+    <input
+      id={id}
+      type={type}
+      autoComplete={autoComplete}
+      className={inputClass}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+    {hint && <p className="mt-1 text-sm text-gray-500">{hint}</p>}
+    <FieldError message={error} />
+  </div>
+);
+
 export const BattlesnakeRegistrationScene = () => {
   const { data, isError, refetch } = useQuery({
     queryKey: ['battlesnake-brackets'],
@@ -47,20 +90,21 @@ export const BattlesnakeRegistrationScene = () => {
   });
 
   const [bracket, setBracket] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [dietaryRestrictions, setDietaryRestrictions] = useState('');
   const [username, setUsername] = useState('');
   const [snakes, setSnakes] = useState<ArenaSnake[] | null>(null);
   const [snakeId, setSnakeId] = useState('');
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [loadingSnakes, setLoadingSnakes] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [reservation, setReservation] = useState<{
-    code: string;
-    checkoutUrl: string;
+  const [registered, setRegistered] = useState<{
+    bracket: string;
     snakeName: string;
+    emailed: boolean;
   } | null>(null);
-  const [complete, setComplete] = useState(false);
-  const onOrderComplete = useCallback(() => setComplete(true), []);
 
   const findSnakes = async () => {
     if (!username.trim()) return;
@@ -98,14 +142,22 @@ export const BattlesnakeRegistrationScene = () => {
       const res = await fetch('/api/battlesnake/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bracket, email, username, snake: snakeId }),
+        body: JSON.stringify({
+          bracket,
+          firstName,
+          lastName,
+          email,
+          dietaryRestrictions,
+          username,
+          snake: snakeId,
+        }),
       });
       const result = await res.json();
       if (result.ok) {
-        setReservation({
-          code: result.code,
-          checkoutUrl: result.checkoutUrl,
+        setRegistered({
+          bracket: result.bracket,
           snakeName: result.snake.snakeName,
+          emailed: result.emailed,
         });
         setSubmitting(false);
         return;
@@ -125,45 +177,41 @@ export const BattlesnakeRegistrationScene = () => {
       <h1 className="text-3xl font-bold">Register your Battlesnake</h1>
       {tournament && (
         <p className="mt-2 text-gray-500 dark:text-gray-400">
-          {tournament.dateLabel} at {tournament.venue}. Free to compete. Coming to watch?{' '}
-          <a className="underline" href={tournament.eventUrl}>
-            Get a spectator ticket on Eventbrite
-          </a>
-          .
+          {tournament.dateLabel} at {tournament.venue}. Free to compete.
         </p>
       )}
       <p className="mt-2 text-gray-500 dark:text-gray-400">
         Your snake doesn't need to be ready yet. We just need its name so we can add it to the
-        tournament. You'll finish on Eventbrite, which sends your confirmation.
+        tournament.
       </p>
+      <div className="mt-4 rounded-md border p-3 text-sm dark:border-gray-700">
+        <span className="font-medium">Coming to watch?</span> This page is for competitors.
+        Spectators get a free ticket on{' '}
+        <a
+          className="underline"
+          href={
+            tournament?.eventUrl ?? 'https://www.eventbrite.ca/e/battlesnake-tickets-1987198013753'
+          }
+        >
+          Eventbrite
+        </a>
+        .
+      </div>
 
-      {complete ? (
+      {registered ? (
         <div className="mt-8 space-y-2">
           <h2 className="text-xl font-semibold">You're registered!</h2>
           <p className="text-gray-500 dark:text-gray-400">
-            {reservation?.snakeName} is in the tournament. Eventbrite has emailed your ticket. Join
-            #battlesnake in the{' '}
+            {registered.snakeName} is in the {registered.bracket} bracket.{' '}
+            {registered.emailed
+              ? `We've emailed a confirmation to ${email}.`
+              : "We couldn't send your confirmation email, but your spot is saved."}{' '}
+            Join #battlesnake in the{' '}
             <a className="underline" href="http://joinslack.hackregina.com/">
               HackRegina Slack
             </a>{' '}
             for questions and strategy talk.
           </p>
-        </div>
-      ) : reservation && tournament ? (
-        <div className="mt-8 space-y-4">
-          <h2 className="text-xl font-semibold">3. Your details</h2>
-          <p className="text-gray-500 dark:text-gray-400">
-            We've held a spot for {reservation.snakeName}. Fill in your details below to finish.
-          </p>
-          <EventbriteCheckout
-            eventId={tournament.eventId}
-            promoCode={reservation.code}
-            fallbackUrl={reservation.checkoutUrl}
-            onOrderComplete={onOrderComplete}
-          />
-          <Button type="button" variant="outline" onClick={() => setReservation(null)}>
-            Change bracket or snake
-          </Button>
         </div>
       ) : (
         <form onSubmit={submit} className="mt-8 space-y-6" noValidate>
@@ -208,27 +256,6 @@ export const BattlesnakeRegistrationScene = () => {
           <fieldset className="space-y-3">
             <legend className="font-semibold">2. Pick your snake</legend>
             <div>
-              <label htmlFor="email" className="mb-1 block text-sm font-medium">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                className={inputClass}
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setErrors({});
-                }}
-              />
-              <p className="mt-1 text-sm text-gray-500">
-                Use the same email for Eventbrite. If you've already registered, we'll let you know
-                instead of booking a second spot.
-              </p>
-              <FieldError message={errors.email} />
-            </div>
-            <div>
               <label htmlFor="username" className="mb-1 block text-sm font-medium">
                 Battlesnake username
               </label>
@@ -247,6 +274,7 @@ export const BattlesnakeRegistrationScene = () => {
                 <Button
                   type="button"
                   variant="outline"
+                  className="text-gray-900"
                   onClick={findSnakes}
                   disabled={loadingSnakes}
                 >
@@ -293,13 +321,60 @@ export const BattlesnakeRegistrationScene = () => {
             <FieldError message={errors.snake} />
           </fieldset>
 
+          <fieldset className="space-y-3">
+            <legend className="font-semibold">3. Your details</legend>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <TextField
+                id="firstName"
+                label="First name"
+                autoComplete="given-name"
+                value={firstName}
+                onChange={setFirstName}
+                error={errors.firstName}
+              />
+              <TextField
+                id="lastName"
+                label="Last name"
+                autoComplete="family-name"
+                value={lastName}
+                onChange={setLastName}
+                error={errors.lastName}
+              />
+            </div>
+            <TextField
+              id="email"
+              label="Email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={setEmail}
+              error={errors.email}
+              hint="We'll send your confirmation here. If you've already registered, we'll tell you instead of booking a second spot."
+            />
+            <TextField
+              id="dietaryRestrictions"
+              label="Dietary restrictions (optional)"
+              value={dietaryRestrictions}
+              onChange={setDietaryRestrictions}
+              error={errors.dietaryRestrictions}
+              hint="So we can order food everyone can eat."
+            />
+          </fieldset>
+
           <FieldError message={errors.form} />
           <Button
             type="submit"
             size="lg"
-            disabled={submitting || !bracket || !email.trim() || !snakeId}
+            disabled={
+              submitting ||
+              !bracket ||
+              !snakeId ||
+              !firstName.trim() ||
+              !lastName.trim() ||
+              !email.trim()
+            }
           >
-            {submitting ? 'Reserving your spot…' : 'Continue to your details'}
+            {submitting ? 'Registering…' : 'Register'}
           </Button>
         </form>
       )}
