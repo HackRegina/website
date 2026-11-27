@@ -2,9 +2,11 @@ import { describe, expect, test } from 'bun:test';
 import {
   accessCodeFor,
   checkoutUrl,
+  eventDateLabel,
   isBracket,
   matchCompetitor,
   spectatorStatuses,
+  venueLabel,
 } from '@/lib/battlesnakeTickets';
 
 describe('accessCodeFor', () => {
@@ -87,5 +89,36 @@ describe('spectatorStatuses', () => {
         { id: '3', name: 'Virtual Spectator', quantity_total: 50, quantity_sold: 50 },
       ])[0].remaining,
     ).toBe(0);
+  });
+});
+
+describe('eventDateLabel', () => {
+  const zone = 'America/Regina';
+  test('reads the time from Eventbrite in the event time zone', () => {
+    expect(
+      eventDateLabel(
+        { local: '2026-12-02T17:00:00', timezone: zone },
+        { local: '2026-12-02T21:00:00', timezone: zone },
+      ),
+    ).toBe('Wednesday, December 2, 2026 · 5 to 9 PM');
+  });
+  test('shows minutes and both halves of the day when needed', () => {
+    expect(
+      eventDateLabel(
+        { local: '2026-12-02T11:30:00', timezone: zone },
+        { local: '2026-12-02T13:00:00', timezone: zone },
+      ),
+    ).toBe('Wednesday, December 2, 2026 · 11:30 AM to 1 PM');
+  });
+});
+
+describe('venueLabel', () => {
+  test('joins the venue name and address', () => {
+    expect(
+      venueLabel({
+        name: 'Cultivator',
+        address: { address_1: '2375 College Ave', city: 'Regina' },
+      }),
+    ).toBe('Cultivator, 2375 College Ave, Regina');
   });
 });

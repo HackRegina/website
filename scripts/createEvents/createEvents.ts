@@ -1,5 +1,6 @@
 import { createEvent, createTicketClass, setStructuredContent } from '@/fetch/createEvent';
 import type { PlannedEvent } from './generateEvents';
+import { agendaFor } from './templates';
 
 export async function createEvents(events: PlannedEvent[]) {
   const eventsWithUrls = new Map<PlannedEvent, PlannedEvent & { url: string }>();
@@ -17,7 +18,7 @@ export async function createEvents(events: PlannedEvent[]) {
     await setStructuredContent(id, {
       description: event.template.description,
       faqs: event.template.faqs,
-      agenda: event.template.agenda,
+      agenda: agendaFor(event.template.startHour, event.template.agenda),
     });
 
     const salesStart = event.date

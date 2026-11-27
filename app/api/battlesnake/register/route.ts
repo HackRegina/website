@@ -3,10 +3,10 @@ import { verifyBattlesnake } from '@/lib/battlesnake';
 import {
   fetchBrackets,
   fetchTicketOptions,
+  fetchTournament,
   findExistingCompetitor,
   isBracket,
   reserveTicket,
-  TOURNAMENT,
 } from '@/lib/battlesnakeTickets';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,9 +16,12 @@ const fail = (field: string, error: string, status = 400) =>
 
 export async function GET() {
   try {
-    const { brackets, spectators } = await fetchTicketOptions();
+    const [{ brackets, spectators }, tournament] = await Promise.all([
+      fetchTicketOptions(),
+      fetchTournament(),
+    ]);
     return NextResponse.json({
-      tournament: TOURNAMENT,
+      tournament,
       brackets: brackets.map(({ id, label, capacity, remaining }) => ({
         id,
         label,

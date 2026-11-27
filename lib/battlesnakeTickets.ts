@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { fetchAttendeesForEvent, type IAttendee } from '@/fetch/attendees';
 import { eventbriteGet, eventbritePost, ORG_ID } from '@/fetch/eventbrite';
 import type { VerifiedBattlesnake } from '@/lib/battlesnake';
@@ -12,9 +13,46 @@ import type { VerifiedBattlesnake } from '@/lib/battlesnake';
 export const TOURNAMENT = {
   eventId: '1987198013753',
   eventUrl: 'https://www.eventbrite.ca/e/battlesnake-tickets-1987198013753',
-  name: 'Battlesnake 2026',
-  dateLabel: 'Wednesday, December 2, 2026 · 5 to 9 PM',
-  venue: 'Cultivator, 2375 College Ave, Regina',
+};
+
+interface EventbriteTime {
+  local: string;
+  timezone: string;
+}
+
+interface EventbriteEventDetails {
+  name?: { text?: string };
+  start: EventbriteTime;
+  end: EventbriteTime;
+  venue?: { name?: string; address?: { address_1?: string; city?: string } } | null;
+}
+
+const clockLabel = (time: DateTime) =>
+  time.toFormat(time.minute ? 'h:mm' : 'h').concat(time.hour < 12 ? ' AM' : ' PM');
+
+/** e.g. "Wednesday, December 2, 2026 · 5 to 9 PM", in the event's own time zone. */
+export const eventDateLabel = (start: EventbriteTime, end: EventbriteTime) => {
+  const from = DateTime.fromISO(start.local, { zone: start.timezone });
+  const to = DateTime.fromISO(end.local, { zone: end.timezone });
+  const sameHalf = from.hour < 12 === to.hour < 12;
+  const fromLabel = sameHalf ? clockLabel(from).replace(/ [AP]M$/, '') : clockLabel(from);
+  return `${from.toFormat('cccc, LLLL d, yyyy')} · ${fromLabel} to ${clockLabel(to)}`;
+};
+
+export const venueLabel = (venue: EventbriteEventDetails['venue']) =>
+  [venue?.name, venue?.address?.address_1, venue?.address?.city].filter(Boolean).join(', ');
+
+/** The tournament's name, time and venue, read from Eventbrite so they never drift. */
+export const fetchTournament = async () => {
+  const event = await eventbriteGet<EventbriteEventDetails>(`/events/${TOURNAMENT.eventId}/`, {
+    expand: 'venue',
+  });
+  return {
+    ...TOURNAMENT,
+    name: event.name?.text ?? 'Battlesnake',
+    dateLabel: eventDateLabel(event.start, event.end),
+    venue: venueLabel(event.venue),
+  };
 };
 
 export const BRACKETS = {
