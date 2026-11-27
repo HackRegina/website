@@ -1,5 +1,27 @@
 import type { AgendaSlot, FAQ, TicketClassConfig } from '@/fetch/createEvent';
 
+/** An agenda slot timed in minutes after the event starts. */
+export interface RelativeAgendaSlot {
+  title: string;
+  description: string;
+  startsAfter: number;
+  endsAfter: number;
+}
+
+const clock = (startHour: number, minutesAfter: number) => {
+  const total = startHour * 60 + minutesAfter;
+  return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
+};
+
+/** Turns a template's agenda into clock times from the event's start hour. */
+export const agendaFor = (startHour: number, slots: RelativeAgendaSlot[] = []): AgendaSlot[] =>
+  slots.map(({ title, description, startsAfter, endsAfter }) => ({
+    title,
+    description,
+    startTime: clock(startHour, startsAfter),
+    endTime: clock(startHour, endsAfter),
+  }));
+
 export const TIMEZONE = 'America/Regina';
 
 // --- Venue data (from Eventbrite API) ---
@@ -23,7 +45,7 @@ export interface EventTemplate {
   summary: string;
   description: string;
   faqs?: FAQ[];
-  agenda?: AgendaSlot[];
+  agenda?: RelativeAgendaSlot[];
   venue: (typeof VENUES)[keyof typeof VENUES];
   startHour: number;
   endHour: number;
@@ -90,7 +112,7 @@ export const EVENT_TEMPLATES = {
     name: 'Battlesnake',
     summary: 'Spectate or compete in the most competitive developer event in Saskatchewan',
     description:
-      '<p>A competitive game where your code is the controller. All you need is a web server that responds to the Battlesnake API.</p><p><a href="https://play.battlesnake.com/" target="_blank" rel="nofollow noopener noreferrer">Learn more</a></p><p><br></p><h3>For spectators</h3><p>Join us on Wednesday, December 3rd, for an exhilarating display of competitive coding. Watch developers from across the province showcase their skills, maneuvering their Battlesnakes strategically to outwit opponents. The tournament promises intense moments of skillful coding and strategic brilliance, creating a captivating atmosphere for all spectators. Join in the excitement, cheer for your favourite Battlesnakes, and immerse yourself in the dynamic world of this unique programming challenge.</p><p><br></p><h3>For participants</h3><p>Your training starts today. This is your chance to showcase your coding prowess and strategic brilliance in a dynamic multiplayer programming challenge. Throughout the competition, unleash your creativity in crafting efficient Battlesnakes, navigate coding challenges, and vie for victory against talented developers from across the province. As you delve into the exhilarating world of Battlesnake, expect to experience intense rounds, strategic gameplay, and the camaraderie of like-minded coders. Seize this opportunity to not only sharpen your coding skills but also to forge connections within the coding community. The Battlesnake Tournament awaits your innovative strategies and competitive spirit\u2014may the most cunning Battlesnake emerge triumphant!</p><p>With the resource provided, competitors can create their account and deploy a starter project in under 5 minutes:<br><a href="https://docs.battlesnake.com/quickstart" target="_blank" rel="nofollow noopener noreferrer">https://docs.battlesnake.com/quickstart</a></p><p>If you want to get started in a particular language, they have different starter projects here:<br><a href="https://docs.battlesnake.com/starter-projects" target="_blank" rel="nofollow noopener noreferrer">https://docs.battlesnake.com/starter-projects</a></p><p>You can spend anywhere from 1 to 100+ hours training and adjusting your snake to give you the competitive edge. Anyone can join the <a href="https://app.slack.com/client/T59Q6UULC/C01AR2WNBUM" target="_blank" rel="nofollow noopener noreferrer">HackRegina Slack\'s #battlesnake channel</a> for support and chat with other competitors.</p>',
+      '<p>A competitive game where your code is the controller. All you need is a web server that responds to the Battlesnake API.</p><p><a href="https://play.battlesnake.com/" target="_blank" rel="nofollow noopener noreferrer">Learn more</a></p><p><br></p><h3>For spectators</h3><p>Join us for an exhilarating display of competitive coding. Watch developers from across the province showcase their skills, maneuvering their Battlesnakes strategically to outwit opponents. The tournament promises intense moments of skillful coding and strategic brilliance, creating a captivating atmosphere for all spectators. Join in the excitement, cheer for your favourite Battlesnakes, and immerse yourself in the dynamic world of this unique programming challenge.</p><p><br></p><h3>For participants</h3><p>Your training starts today. This is your chance to showcase your coding prowess and strategic brilliance in a dynamic multiplayer programming challenge. Throughout the competition, unleash your creativity in crafting efficient Battlesnakes, navigate coding challenges, and vie for victory against talented developers from across the province. As you delve into the exhilarating world of Battlesnake, expect to experience intense rounds, strategic gameplay, and the camaraderie of like-minded coders. Seize this opportunity to not only sharpen your coding skills but also to forge connections within the coding community. The Battlesnake Tournament awaits your innovative strategies and competitive spirit\u2014may the most cunning Battlesnake emerge triumphant!</p><p>With the resource provided, competitors can create their account and deploy a starter project in under 5 minutes:<br><a href="https://docs.battlesnake.com/quickstart" target="_blank" rel="nofollow noopener noreferrer">https://docs.battlesnake.com/quickstart</a></p><p>If you want to get started in a particular language, they have different starter projects here:<br><a href="https://docs.battlesnake.com/starter-projects" target="_blank" rel="nofollow noopener noreferrer">https://docs.battlesnake.com/starter-projects</a></p><p>You can spend anywhere from 1 to 100+ hours training and adjusting your snake to give you the competitive edge. Anyone can join the <a href="https://app.slack.com/client/T59Q6UULC/C01AR2WNBUM" target="_blank" rel="nofollow noopener noreferrer">HackRegina Slack\'s #battlesnake channel</a> for support and chat with other competitors.</p>',
     faqs: [
       {
         question: 'Do I need to know how to program to play Battlesnake?',
@@ -108,25 +130,26 @@ export const EVENT_TEMPLATES = {
           'You can build a successful Battlesnake on almost any cloud provider, hosted anywhere in the world. Your choice of cloud provider has no impact on your ability to play the game and we encourage you to explore and learn new platforms.',
       },
     ],
+    // Minutes after the event starts, so the agenda moves with the Eventbrite start time.
     agenda: [
-      { title: 'Doors Open', description: '', startTime: '18:00', endTime: '18:45' },
+      { title: 'Doors Open', description: '', startsAfter: 0, endsAfter: 45 },
       {
         title: 'Student Tournament',
         description: 'Timing may vary based on the number of competitors',
-        startTime: '18:45',
-        endTime: '19:30',
+        startsAfter: 45,
+        endsAfter: 90,
       },
       {
         title: 'Rookie Tournament',
         description: 'Timing may vary based on the number of competitors',
-        startTime: '19:45',
-        endTime: '20:30',
+        startsAfter: 105,
+        endsAfter: 150,
       },
       {
         title: 'Veteran Tournament',
         description: 'Timing may vary based on the number of competitors',
-        startTime: '20:45',
-        endTime: '21:30',
+        startsAfter: 165,
+        endsAfter: 210,
       },
     ],
     venue: VENUES.cultivator,
